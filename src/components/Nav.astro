@@ -16,12 +16,8 @@ const links = [
       <span class="nav__logo-text">IFFTU</span>
     </a>
 
-    <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span class="nav__toggle-line"></span>
-      <span class="nav__toggle-line"></span>
-    </button>
-
-    <ul class="nav__links">
+    <!-- Desktop links -->
+    <ul class="nav__links nav__links--desktop">
       {links.map((link, i) => (
         <li>
           <a
@@ -34,10 +30,40 @@ const links = [
         </li>
       ))}
     </ul>
+
+    <!-- Mobile toggle -->
+    <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="nav__toggle-line nav__toggle-line--top"></span>
+      <span class="nav__toggle-line nav__toggle-line--bottom"></span>
+    </button>
   </div>
 </nav>
 
+<!-- Mobile fullscreen overlay (outside nav for clean z-index stacking) -->
+<div class="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu__inner">
+    <div class="mobile-menu__label text-mono">// NAVIGATION</div>
+    <ul class="mobile-menu__links">
+      {links.map((link, i) => (
+        <li class="mobile-menu__item" style={`--i: ${i}`}>
+          <a
+            href={link.href}
+            class:list={['mobile-menu__link', { 'mobile-menu__link--active': currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }]}
+          >
+            <span class="mobile-menu__link-index text-display">{String(i).padStart(2, '0')}</span>
+            <span class="mobile-menu__link-label text-display">{link.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="mobile-menu__footer">
+      <span class="text-mono">"I FIGHT FOR THE USERS"</span>
+    </div>
+  </div>
+</div>
+
 <style>
+  /* ====== NAV BAR ====== */
   .nav {
     position: fixed;
     top: 0;
@@ -66,6 +92,8 @@ const links = [
     text-decoration: none;
     color: var(--white);
     transition: color 0.15s;
+    position: relative;
+    z-index: 1001;
   }
 
   .nav__logo:hover {
@@ -79,25 +107,8 @@ const links = [
     font-weight: 700;
   }
 
-  .nav__toggle {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    background: none;
-    border: 1px solid var(--border);
-    padding: 0.75rem;
-    cursor: pointer;
-  }
-
-  .nav__toggle-line {
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--white);
-    transition: transform 0.3s, opacity 0.3s;
-  }
-
-  .nav__links {
+  /* ====== DESKTOP LINKS ====== */
+  .nav__links--desktop {
     display: flex;
     list-style: none;
     gap: 0;
@@ -138,59 +149,210 @@ const links = [
     opacity: 0.6;
   }
 
-  /* Mobile */
+  /* ====== TOGGLE BUTTON ====== */
+  .nav__toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    position: relative;
+    z-index: 1001;
+    transition: border-color 0.3s;
+  }
+
+  .nav__toggle:hover {
+    border-color: var(--accent);
+  }
+
+  .nav__toggle-line {
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--white);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), top 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
+  }
+
+  .nav__toggle-line--top {
+    top: 17px;
+  }
+
+  .nav__toggle-line--bottom {
+    top: 25px;
+  }
+
+  /* Toggle open state — lines become X */
+  .nav__toggle.is-active .nav__toggle-line {
+    background: var(--accent);
+  }
+
+  .nav__toggle.is-active .nav__toggle-line--top {
+    top: 21px;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .nav__toggle.is-active .nav__toggle-line--bottom {
+    top: 21px;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  /* ====== MOBILE OVERLAY ====== */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: var(--black);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+  }
+
+  .mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 6rem var(--gutter) var(--space-lg);
+  }
+
+  .mobile-menu__label {
+    color: var(--gray);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    margin-bottom: var(--space-lg);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s 0.1s, transform 0.4s 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-menu.is-open .mobile-menu__label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu__links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex-grow: 1;
+  }
+
+  .mobile-menu__item {
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.4s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(0.15s + var(--i) * 0.06s);
+  }
+
+  .mobile-menu.is-open .mobile-menu__item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .mobile-menu__link {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    text-decoration: none;
+    color: var(--white);
+    transition: color 0.2s;
+  }
+
+  .mobile-menu__link:hover,
+  .mobile-menu__link--active {
+    color: var(--accent);
+  }
+
+  .mobile-menu__link-index {
+    font-size: 1rem;
+    color: var(--border);
+    min-width: 2rem;
+    transition: color 0.2s;
+  }
+
+  .mobile-menu__link:hover .mobile-menu__link-index,
+  .mobile-menu__link--active .mobile-menu__link-index {
+    color: var(--accent);
+    opacity: 0.6;
+  }
+
+  .mobile-menu__link-label {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+
+  .mobile-menu__footer {
+    margin-top: auto;
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s 0.4s, transform 0.4s 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-menu.is-open .mobile-menu__footer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-menu__footer span {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+  }
+
+  /* ====== RESPONSIVE ====== */
   @media (max-width: 768px) {
+    .nav__links--desktop {
+      display: none;
+    }
+
     .nav__toggle {
       display: flex;
     }
 
-    .nav__links {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--black);
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      z-index: 999;
-    }
-
-    .nav__links.is-open {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .nav__link {
-      font-size: 1rem;
-      padding: 1rem 2rem;
-    }
-
-    .nav__link-index {
-      font-size: 0.75rem;
+    .mobile-menu {
+      display: block;
     }
   }
 </style>
 
 <script>
   const toggle = document.querySelector('.nav__toggle');
-  const links = document.querySelector('.nav__links');
+  const menu = document.querySelector('.mobile-menu');
 
   toggle?.addEventListener('click', () => {
-    const isOpen = links?.classList.toggle('is-open');
+    const isOpen = toggle.classList.toggle('is-active');
+    menu?.classList.toggle('is-open', isOpen);
+    menu?.setAttribute('aria-hidden', String(!isOpen));
     toggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
-  // Close menu on link click (mobile)
-  links?.querySelectorAll('a').forEach(link => {
+  // Close on link click
+  menu?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-      links.classList.remove('is-open');
+      toggle?.classList.remove('is-active');
+      menu.classList.remove('is-open');
+      menu.setAttribute('aria-hidden', 'true');
       toggle?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     });
   });
 </script>
