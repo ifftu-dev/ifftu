@@ -334,25 +334,33 @@ const links = [
 </style>
 
 <script>
-  const toggle = document.querySelector('.nav__toggle');
-  const menu = document.querySelector('.mobile-menu');
+  function initMobileMenu() {
+    const toggle = document.querySelector('.nav__toggle');
+    const menu = document.querySelector('.mobile-menu');
 
-  toggle?.addEventListener('click', () => {
-    const isOpen = toggle.classList.toggle('is-active');
-    menu?.classList.toggle('is-open', isOpen);
-    menu?.setAttribute('aria-hidden', String(!isOpen));
-    toggle.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-
-  // Close on link click
-  menu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
+    function closeMenu() {
       toggle?.classList.remove('is-active');
-      menu.classList.remove('is-open');
-      menu.setAttribute('aria-hidden', 'true');
+      menu?.classList.remove('is-open');
+      menu?.setAttribute('aria-hidden', 'true');
       toggle?.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+    }
+
+    toggle?.addEventListener('click', () => {
+      const isOpen = toggle.classList.toggle('is-active');
+      menu?.classList.toggle('is-open', isOpen);
+      menu?.setAttribute('aria-hidden', String(!isOpen));
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-  });
+
+    menu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close menu on client-side navigation
+    document.addEventListener('astro:before-preparation', closeMenu);
+  }
+
+  initMobileMenu();
 </script>
