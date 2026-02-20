@@ -1,0 +1,321 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Contact — IFFTU">
+  <section class="page-header">
+    <div class="page-header__inner container">
+      <div class="page-header__pre text-mono animate-reveal delay-1">
+        <span style="color: var(--accent);">//</span> REACH OUT
+      </div>
+      <h1 class="page-header__title text-display animate-reveal delay-2">
+        CONTACT
+      </h1>
+      <p class="page-header__desc animate-reveal delay-3">
+        Questions, proposals, or just want to talk?<br class="hide-mobile" />
+        We're here. No forms. No tickets. Just humans.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="contact__inner container">
+      <div class="contact__grid">
+        <!-- Direct channels -->
+        <div class="contact__channels animate-reveal delay-3">
+          <div class="contact__channel">
+            <div class="contact__channel-header">
+              <span class="contact__channel-index text-display">01</span>
+              <h2 class="contact__channel-title">EMAIL</h2>
+            </div>
+            <p class="contact__channel-desc">
+              For general inquiries, project proposals, or if you just want
+              to say hello.
+            </p>
+            <a href="mailto:hello@ifftu.dev" class="contact__channel-link">
+              hello@ifftu.dev
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <div class="contact__channel">
+            <div class="contact__channel-header">
+              <span class="contact__channel-index text-display">02</span>
+              <h2 class="contact__channel-title">GITHUB</h2>
+            </div>
+            <p class="contact__channel-desc">
+              Report bugs, submit PRs, or browse our code.
+              Everything is open.
+            </p>
+            <a href="https://github.com/ifftu" target="_blank" rel="noopener" class="contact__channel-link">
+              github.com/ifftu
+              <span>&rarr;</span>
+            </a>
+          </div>
+
+          <div class="contact__channel">
+            <div class="contact__channel-header">
+              <span class="contact__channel-index text-display">03</span>
+              <h2 class="contact__channel-title">SECURITY</h2>
+            </div>
+            <p class="contact__channel-desc">
+              Found a vulnerability? Responsible disclosure appreciated.
+              PGP key available on request.
+            </p>
+            <a href="mailto:security@ifftu.dev" class="contact__channel-link">
+              security@ifftu.dev
+              <span>&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Side info -->
+        <aside class="contact__aside animate-reveal delay-4">
+          <div class="contact__aside-block">
+            <h3 class="contact__aside-title text-mono">RESPONSE TIME</h3>
+            <p class="contact__aside-text text-serif">
+              We respond to all emails within 48 hours.
+              Usually much faster.
+            </p>
+          </div>
+
+          <div class="contact__aside-block">
+            <h3 class="contact__aside-title text-mono">CONTRIBUTE</h3>
+            <p class="contact__aside-text text-serif">
+              Want to contribute code, design, research, or documentation?
+              Start with our GitHub repos. Open an issue. Jump in.
+            </p>
+          </div>
+
+          <div class="contact__aside-block">
+            <h3 class="contact__aside-title text-mono">PRESS</h3>
+            <p class="contact__aside-text text-serif">
+              Media inquiries, interview requests, and collaboration
+              proposals should go to hello@ifftu.dev with the subject
+              line [PRESS].
+            </p>
+          </div>
+
+          <div class="contact__aside-pgp">
+            <span class="text-mono" style="color: var(--gray); font-size: 0.6rem; letter-spacing: 0.15em;">PGP FINGERPRINT</span>
+            <code class="contact__aside-fingerprint">
+              XXXX XXXX XXXX XXXX XXXX<br />
+              XXXX XXXX XXXX XXXX XXXX
+            </code>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map / Location substitute — abstract grid -->
+  <section class="location">
+    <div class="location__inner container">
+      <div class="location__content animate-reveal delay-5">
+        <p class="text-mono" style="color: var(--gray); font-size: 0.65rem; letter-spacing: 0.15em; margin-bottom: 1rem;">
+          // LOCATION
+        </p>
+        <p class="text-serif" style="font-size: 1.5rem; color: var(--gray-light);">
+          Everywhere and nowhere.<br />
+          We're a distributed collective.
+        </p>
+        <p style="color: var(--gray); margin-top: 1rem;">
+          Contributors across timezones, united by a shared mission.<br />
+          The internet was built to make geography irrelevant. We agree.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ====== PAGE HEADER ====== */
+  .page-header {
+    padding: calc(6rem + var(--space-xl)) 0 var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .page-header::after {
+    content: 'C';
+    position: absolute;
+    top: 10%;
+    right: -5%;
+    font-family: var(--font-display);
+    font-size: clamp(20rem, 35vw, 40rem);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    opacity: 0.15;
+    pointer-events: none;
+    line-height: 0.8;
+  }
+
+  .page-header__pre {
+    color: var(--gray);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__title {
+    font-size: clamp(4rem, 12vw, 9rem);
+    line-height: 0.9;
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    color: var(--gray-light);
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .hide-mobile {
+    display: inline;
+  }
+
+  /* ====== CONTACT ====== */
+  .contact {
+    padding: var(--space-xl) 0;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  /* Channels */
+  .contact__channels {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .contact__channel {
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .contact__channel:first-child {
+    padding-top: 0;
+  }
+
+  .contact__channel-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact__channel-index {
+    font-size: 2.5rem;
+    color: var(--border);
+    line-height: 1;
+    transition: color 0.3s;
+  }
+
+  .contact__channel:hover .contact__channel-index {
+    color: var(--accent);
+  }
+
+  .contact__channel-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  .contact__channel-desc {
+    color: var(--gray-light);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: var(--space-sm);
+    max-width: 400px;
+  }
+
+  .contact__channel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.3s;
+  }
+
+  .contact__channel-link:hover {
+    gap: 1.25rem;
+    color: var(--accent);
+  }
+
+  /* Aside */
+  .contact__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding-left: var(--space-lg);
+    border-left: 1px solid var(--border);
+  }
+
+  .contact__aside-block {
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact__aside-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    margin-bottom: 0.75rem;
+  }
+
+  .contact__aside-text {
+    font-size: 1rem;
+    color: var(--gray-light);
+    line-height: 1.5;
+  }
+
+  .contact__aside-pgp {
+    margin-top: auto;
+  }
+
+  .contact__aside-fingerprint {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--border);
+    margin-top: 0.5rem;
+    line-height: 1.8;
+    letter-spacing: 0.1em;
+  }
+
+  /* Location */
+  .location {
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .location__content {
+    max-width: 500px;
+  }
+
+  @media (max-width: 768px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    .contact__aside {
+      padding-left: 0;
+      border-left: none;
+      border-top: 1px solid var(--border);
+      padding-top: var(--space-lg);
+    }
+
+    .hide-mobile {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,673 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="IFFTU — I Fight For The Users">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__scan-line"></div>
+    <div class="hero__inner container">
+      <div class="hero__pre animate-reveal delay-1">
+        <span class="hero__pre-line"></span>
+        <span class="text-mono">EST. 2025 — OPEN SOURCE COLLECTIVE</span>
+      </div>
+
+      <h1 class="hero__title text-display animate-reveal delay-2">
+        I FIGHT<br />
+        FOR THE<br />
+        <span class="hero__title-accent">USERS</span>
+      </h1>
+
+      <div class="hero__subtitle animate-reveal delay-3">
+        <p class="text-serif">
+          Cutting-edge technology wielded for humanity's<br class="hide-mobile" />
+          biggest problems. Open. Transparent. Uncompromising.
+        </p>
+      </div>
+
+      <div class="hero__cta animate-reveal delay-4">
+        <a href="/projects" class="btn btn--primary">
+          <span class="btn__index">01</span>
+          VIEW PROJECTS
+        </a>
+        <a href="/contact" class="btn btn--ghost">
+          <span class="btn__index">02</span>
+          GET IN TOUCH
+        </a>
+      </div>
+
+      <div class="hero__scroll animate-reveal delay-5">
+        <span class="hero__scroll-line"></span>
+        <span class="text-mono">SCROLL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto -->
+  <section class="manifesto">
+    <div class="manifesto__inner container">
+      <div class="manifesto__label text-mono animate-reveal">
+        <span class="manifesto__label-mark">//</span> MANIFESTO
+      </div>
+
+      <div class="manifesto__content">
+        <blockquote class="manifesto__quote animate-reveal delay-2">
+          <p class="text-serif">
+            The digital world was built with the promise of liberation.
+            Somewhere along the way, the users became the product.
+            We exist to reverse that equation.
+          </p>
+        </blockquote>
+
+        <div class="manifesto__text animate-reveal delay-3">
+          <p>
+            IFFTU is a collective dedicated to building technology that serves
+            people — not the other way around. Every project we undertake is
+            open source, every decision transparent, every line of code
+            accountable to the humans it affects.
+          </p>
+          <p>
+            We don't build for engagement metrics. We don't optimize for
+            addiction. We build tools that solve real problems and then we
+            give them away. Because the most powerful technology is the kind
+            that belongs to everyone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section class="principles">
+    <div class="principles__inner container">
+      <div class="principles__grid">
+        <div class="principle animate-reveal delay-1">
+          <span class="principle__number text-display">01</span>
+          <h3 class="principle__title">OPEN BY DEFAULT</h3>
+          <p class="principle__text">
+            Every repository public. Every decision documented.
+            No black boxes. No walled gardens.
+          </p>
+        </div>
+
+        <div class="principle animate-reveal delay-2">
+          <span class="principle__number text-display">02</span>
+          <h3 class="principle__title">HUMANITY FIRST</h3>
+          <p class="principle__text">
+            Technology is a means, never the end.
+            If it doesn't serve people, it doesn't ship.
+          </p>
+        </div>
+
+        <div class="principle animate-reveal delay-3">
+          <span class="principle__number text-display">03</span>
+          <h3 class="principle__title">RADICAL TRANSPARENCY</h3>
+          <p class="principle__text">
+            Finances, roadmaps, failures — all public.
+            Trust is built in the open, not behind NDAs.
+          </p>
+        </div>
+
+        <div class="principle animate-reveal delay-4">
+          <span class="principle__number text-display">04</span>
+          <h3 class="principle__title">UNCOMPROMISING CRAFT</h3>
+          <p class="principle__text">
+            Good enough isn't. Every interface considered,
+            every algorithm audited, every edge case handled.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Project -->
+  <section class="featured">
+    <div class="featured__inner container">
+      <div class="featured__label text-mono animate-reveal">
+        <span class="featured__label-mark">//</span> FEATURED PROJECT
+      </div>
+
+      <div class="featured__project animate-reveal delay-2">
+        <div class="featured__project-header">
+          <span class="featured__status">
+            <span class="featured__status-dot"></span>
+            IN DEVELOPMENT
+          </span>
+          <span class="text-mono" style="color: var(--gray);">2025 —</span>
+        </div>
+
+        <h2 class="featured__project-name text-display">ALEXANDRIA</h2>
+
+        <p class="featured__project-desc text-serif">
+          The library that never burns. A decentralized, censorship-resistant
+          knowledge preservation system built to outlast institutions.
+        </p>
+
+        <div class="featured__project-meta">
+          <span class="featured__tag">DECENTRALIZED</span>
+          <span class="featured__tag">OPEN SOURCE</span>
+          <span class="featured__tag">KNOWLEDGE PRESERVATION</span>
+        </div>
+
+        <a href="/projects" class="featured__project-link">
+          LEARN MORE
+          <span class="featured__project-arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta__inner container">
+      <div class="cta__content animate-reveal">
+        <h2 class="cta__title text-display">
+          THE FIGHT<br />ISN'T OPTIONAL
+        </h2>
+        <p class="cta__text">
+          We're looking for developers, researchers, and troublemakers
+          who believe technology should serve humanity. Not the other way around.
+        </p>
+        <a href="/contact" class="btn btn--primary btn--large">
+          JOIN THE FIGHT
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ====== HERO ====== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 6rem;
+  }
+
+  .hero__scan-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-dim);
+    animation: scan-line 6s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: 'IFFTU';
+    position: absolute;
+    bottom: -5%;
+    right: -2%;
+    font-family: var(--font-display);
+    font-size: clamp(15rem, 25vw, 30rem);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    line-height: 0.8;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__pre {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__pre-line {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero__title {
+    font-size: clamp(4rem, 12vw, 11rem);
+    line-height: 0.88;
+    margin-bottom: var(--space-md);
+    position: relative;
+  }
+
+  .hero__title-accent {
+    color: var(--accent);
+    position: relative;
+  }
+
+  .hero__title-accent::after {
+    content: '';
+    position: absolute;
+    bottom: 0.08em;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent);
+    transform-origin: left;
+    animation: line-grow 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+    transform: scaleX(0);
+  }
+
+  .hero__subtitle {
+    max-width: 540px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__subtitle p {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    color: var(--gray-light);
+  }
+
+  .hero__cta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero__scroll {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--gray);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .hide-mobile {
+    display: inline;
+  }
+
+  /* ====== BUTTONS ====== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-101%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+  }
+
+  .btn:hover::before {
+    transform: translateX(0);
+  }
+
+  .btn:hover {
+    color: var(--black);
+    border-color: var(--accent);
+  }
+
+  .btn--primary {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn--ghost {
+    color: var(--gray-light);
+  }
+
+  .btn--large {
+    padding: 1.25rem 3rem;
+    font-size: 0.8rem;
+  }
+
+  .btn__index {
+    font-size: 0.6rem;
+    opacity: 0.5;
+  }
+
+  /* ====== MANIFESTO ====== */
+  .manifesto {
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .manifesto__inner {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  .manifesto__label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--gray);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+
+  .manifesto__label-mark {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .manifesto__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .manifesto__quote {
+    position: relative;
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--accent);
+  }
+
+  .manifesto__quote p {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  .manifesto__text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .manifesto__text p {
+    color: var(--gray-light);
+    line-height: 1.8;
+  }
+
+  /* ====== PRINCIPLES ====== */
+  .principles {
+    padding: var(--space-xl) 0;
+  }
+
+  .principles__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+
+  .principle {
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    margin-right: -1px;
+    margin-bottom: -1px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .principle:hover {
+    background: rgba(255, 34, 0, 0.03);
+  }
+
+  .principle:hover .principle__number {
+    color: var(--accent);
+  }
+
+  .principle__number {
+    font-size: 3rem;
+    color: var(--border);
+    transition: color 0.3s;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .principle__title {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+    color: var(--white);
+  }
+
+  .principle__text {
+    font-size: 0.8rem;
+    color: var(--gray-light);
+    line-height: 1.7;
+  }
+
+  /* ====== FEATURED ====== */
+  .featured {
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .featured__label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--gray);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-lg);
+  }
+
+  .featured__label-mark {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .featured__project {
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured__project::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .featured__project::after {
+    content: 'A';
+    position: absolute;
+    bottom: -20%;
+    right: -5%;
+    font-family: var(--font-display);
+    font-size: 30rem;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    opacity: 0.15;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .featured__project-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+
+  .featured__status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .featured__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: flicker 2s ease-in-out infinite;
+  }
+
+  .featured__project-name {
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.9;
+    margin-bottom: var(--space-md);
+    position: relative;
+    z-index: 1;
+  }
+
+  .featured__project-desc {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    color: var(--gray-light);
+    max-width: 600px;
+    margin-bottom: var(--space-md);
+    position: relative;
+    z-index: 1;
+  }
+
+  .featured__project-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+    position: relative;
+    z-index: 1;
+  }
+
+  .featured__tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border);
+    color: var(--gray-light);
+  }
+
+  .featured__project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    transition: gap 0.3s;
+  }
+
+  .featured__project-link:hover {
+    gap: 1.25rem;
+    color: var(--accent);
+  }
+
+  .featured__project-arrow {
+    transition: transform 0.3s;
+  }
+
+  .featured__project-link:hover .featured__project-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ====== CTA ====== */
+  .cta {
+    padding: var(--space-2xl) 0 var(--space-xl);
+    text-align: center;
+    position: relative;
+  }
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .cta__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta__title {
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.9;
+    margin-bottom: var(--space-md);
+  }
+
+  .cta__text {
+    max-width: 500px;
+    margin: 0 auto var(--space-lg);
+    color: var(--gray-light);
+    line-height: 1.8;
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 1024px) {
+    .principles__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero__cta {
+      flex-direction: column;
+    }
+
+    .manifesto__content {
+      grid-template-columns: 1fr;
+    }
+
+    .principles__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hide-mobile {
+      display: none;
+    }
+
+    .featured__project {
+      padding: var(--space-md);
+    }
+  }
+</style>

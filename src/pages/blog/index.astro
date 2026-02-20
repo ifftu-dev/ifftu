@@ -1,0 +1,268 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const posts = [
+  {
+    slug: 'why-we-fight',
+    title: 'WHY WE FIGHT',
+    date: '2025-02-15',
+    excerpt: 'The internet promised liberation. It delivered surveillance capitalism. Here\'s why we started IFFTU and what we intend to do about it.',
+    tags: ['MANIFESTO', 'OPEN SOURCE'],
+    readTime: '8 MIN',
+  },
+  {
+    slug: 'introducing-alexandria',
+    title: 'INTRODUCING ALEXANDRIA',
+    date: '2025-02-01',
+    excerpt: 'A decentralized knowledge preservation system built to outlast any institution. The library that never burns is now under active development.',
+    tags: ['ALEXANDRIA', 'ANNOUNCEMENT'],
+    readTime: '5 MIN',
+  },
+  {
+    slug: 'transparency-report-001',
+    title: 'TRANSPARENCY REPORT #001',
+    date: '2025-01-20',
+    excerpt: 'Our first transparency report. Where the money goes, what we\'re working on, and every decision we made this month — explained.',
+    tags: ['TRANSPARENCY', 'REPORT'],
+    readTime: '12 MIN',
+  },
+];
+
+function formatDate(dateStr: string) {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).toUpperCase();
+}
+---
+
+<Base title="Blog — IFFTU">
+  <section class="page-header">
+    <div class="page-header__inner container">
+      <div class="page-header__pre text-mono animate-reveal delay-1">
+        <span style="color: var(--accent);">//</span> DISPATCHES
+      </div>
+      <h1 class="page-header__title text-display animate-reveal delay-2">
+        BLOG
+      </h1>
+      <p class="page-header__desc animate-reveal delay-3">
+        Updates, manifestos, and transparency reports.<br class="hide-mobile" />
+        Everything in the open. Always.
+      </p>
+    </div>
+  </section>
+
+  <section class="blog">
+    <div class="blog__inner container">
+      <div class="blog__list">
+        {posts.map((post, i) => (
+          <a href={`/blog/${post.slug}`} class={`blog-card animate-reveal delay-${i + 2}`}>
+            <div class="blog-card__index text-display">{String(i + 1).padStart(2, '0')}</div>
+
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="text-mono">{formatDate(post.date)}</span>
+                <span class="blog-card__sep">/</span>
+                <span class="text-mono">{post.readTime}</span>
+              </div>
+
+              <h2 class="blog-card__title">{post.title}</h2>
+
+              <p class="blog-card__excerpt">{post.excerpt}</p>
+
+              <div class="blog-card__tags">
+                {post.tags.map((tag: string) => (
+                  <span class="blog-card__tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+
+            <div class="blog-card__arrow">&rarr;</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ====== PAGE HEADER ====== */
+  .page-header {
+    padding: calc(6rem + var(--space-xl)) 0 var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .page-header::after {
+    content: 'B';
+    position: absolute;
+    top: 10%;
+    right: -5%;
+    font-family: var(--font-display);
+    font-size: clamp(20rem, 35vw, 40rem);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    opacity: 0.15;
+    pointer-events: none;
+    line-height: 0.8;
+  }
+
+  .page-header__pre {
+    color: var(--gray);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__title {
+    font-size: clamp(4rem, 12vw, 9rem);
+    line-height: 0.9;
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    color: var(--gray-light);
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .hide-mobile {
+    display: inline;
+  }
+
+  /* ====== BLOG LIST ====== */
+  .blog {
+    padding: var(--space-xl) 0;
+  }
+
+  .blog__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .blog-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--space-md);
+    align-items: start;
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .blog-card::before {
+    content: '';
+    position: absolute;
+    left: calc(var(--gutter) * -1);
+    top: 0;
+    bottom: 0;
+    width: 0;
+    background: rgba(255, 34, 0, 0.03);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .blog-card:hover::before {
+    width: calc(100% + var(--gutter) * 2);
+  }
+
+  .blog-card:hover {
+    color: var(--white);
+  }
+
+  .blog-card:hover .blog-card__index {
+    color: var(--accent);
+  }
+
+  .blog-card:hover .blog-card__arrow {
+    transform: translateX(8px);
+    color: var(--accent);
+  }
+
+  .blog-card__index {
+    font-size: 3.5rem;
+    color: var(--border);
+    transition: color 0.3s;
+    line-height: 1;
+    min-width: 80px;
+  }
+
+  .blog-card__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .blog-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--gray);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+  }
+
+  .blog-card__sep {
+    color: var(--border);
+  }
+
+  .blog-card__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .blog-card__excerpt {
+    color: var(--gray-light);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    max-width: 580px;
+    margin-bottom: 1rem;
+  }
+
+  .blog-card__tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .blog-card__tag {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--gray);
+  }
+
+  .blog-card__arrow {
+    font-size: 1.5rem;
+    color: var(--gray);
+    transition: all 0.3s;
+    padding-top: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 768px) {
+    .blog-card {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding: var(--space-md) 0;
+    }
+
+    .blog-card__index {
+      font-size: 2rem;
+    }
+
+    .blog-card__arrow {
+      display: none;
+    }
+
+    .hide-mobile {
+      display: none;
+    }
+  }
+</style>

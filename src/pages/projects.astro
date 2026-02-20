@@ -1,0 +1,392 @@
+---
+import Base from '../layouts/Base.astro';
+
+const projects = [
+  {
+    name: 'ALEXANDRIA',
+    status: 'IN DEVELOPMENT',
+    year: '2025',
+    active: true,
+    description: 'A decentralized, censorship-resistant knowledge preservation system. The library that never burns. Built on distributed protocols to ensure humanity\'s collective knowledge survives any single point of failure.',
+    tags: ['DECENTRALIZED', 'P2P', 'KNOWLEDGE PRESERVATION', 'RUST', 'OPEN SOURCE'],
+    goals: [
+      'Censorship-resistant document storage and retrieval',
+      'Decentralized peer-to-peer architecture',
+      'Cryptographic integrity verification',
+      'Offline-first with progressive sync',
+      'Community-governed content curation',
+    ],
+    links: {
+      github: 'https://github.com/ifftu/alexandria',
+    },
+  },
+];
+---
+
+<Base title="Projects — IFFTU">
+  <section class="page-header">
+    <div class="page-header__inner container">
+      <div class="page-header__pre text-mono animate-reveal delay-1">
+        <span style="color: var(--accent);">//</span> WHAT WE BUILD
+      </div>
+      <h1 class="page-header__title text-display animate-reveal delay-2">
+        PROJECTS
+      </h1>
+      <p class="page-header__desc animate-reveal delay-3">
+        Every project open source. Every line of code accountable.<br class="hide-mobile" />
+        We build tools that solve real problems and give them away.
+      </p>
+    </div>
+  </section>
+
+  <section class="projects">
+    <div class="projects__inner container">
+      {projects.map((project, i) => (
+        <article class="project-card animate-reveal delay-3">
+          <div class="project-card__accent"></div>
+
+          <div class="project-card__header">
+            <div class="project-card__status-row">
+              <span class={`project-card__status ${project.active ? 'project-card__status--active' : ''}`}>
+                <span class="project-card__status-dot"></span>
+                {project.status}
+              </span>
+              <span class="text-mono" style="color: var(--gray); font-size: 0.7rem;">{project.year} —</span>
+            </div>
+            <h2 class="project-card__name text-display">{project.name}</h2>
+          </div>
+
+          <div class="project-card__body">
+            <div class="project-card__desc-col">
+              <p class="project-card__desc text-serif">{project.description}</p>
+
+              <div class="project-card__tags">
+                {project.tags.map((tag: string) => (
+                  <span class="project-card__tag">{tag}</span>
+                ))}
+              </div>
+
+              {project.links.github && (
+                <a href={project.links.github} target="_blank" rel="noopener" class="project-card__link">
+                  VIEW ON GITHUB <span>&rarr;</span>
+                </a>
+              )}
+            </div>
+
+            <div class="project-card__goals-col">
+              <h3 class="project-card__goals-title text-mono">OBJECTIVES</h3>
+              <ul class="project-card__goals">
+                {project.goals.map((goal: string, j: number) => (
+                  <li class="project-card__goal">
+                    <span class="project-card__goal-index">{String(j + 1).padStart(2, '0')}</span>
+                    {goal}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div class="project-card__watermark text-display" aria-hidden="true">
+            {project.name.charAt(0)}
+          </div>
+        </article>
+      ))}
+
+      <!-- Future projects teaser -->
+      <div class="projects__upcoming animate-reveal delay-4">
+        <div class="projects__upcoming-border"></div>
+        <div class="projects__upcoming-inner">
+          <span class="text-mono" style="color: var(--gray); font-size: 0.65rem; letter-spacing: 0.15em;">MORE PROJECTS INCOMING</span>
+          <p class="text-serif" style="font-size: 1.25rem; color: var(--gray-light); margin-top: 0.5rem;">
+            Have an idea that fights for the users?
+          </p>
+          <a href="/contact" class="btn btn--ghost" style="margin-top: 1.5rem;">
+            PROPOSE A PROJECT
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ====== PAGE HEADER ====== */
+  .page-header {
+    padding: calc(6rem + var(--space-xl)) 0 var(--space-lg);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .page-header::after {
+    content: 'P';
+    position: absolute;
+    top: 10%;
+    right: -5%;
+    font-family: var(--font-display);
+    font-size: clamp(20rem, 35vw, 40rem);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    opacity: 0.15;
+    pointer-events: none;
+    line-height: 0.8;
+  }
+
+  .page-header__pre {
+    color: var(--gray);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__title {
+    font-size: clamp(4rem, 12vw, 9rem);
+    line-height: 0.9;
+    margin-bottom: var(--space-md);
+  }
+
+  .page-header__desc {
+    color: var(--gray-light);
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .hide-mobile {
+    display: inline;
+  }
+
+  /* ====== PROJECT CARD ====== */
+  .projects {
+    padding: var(--space-xl) 0;
+  }
+
+  .project-card {
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: var(--space-lg);
+  }
+
+  .project-card__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .project-card__watermark {
+    position: absolute;
+    bottom: -15%;
+    right: -3%;
+    font-size: clamp(20rem, 30vw, 35rem);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    opacity: 0.1;
+    pointer-events: none;
+    line-height: 0.8;
+  }
+
+  .project-card__header {
+    margin-bottom: var(--space-lg);
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-card__status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+
+  .project-card__status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .project-card__status--active {
+    color: var(--accent);
+  }
+
+  .project-card__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .project-card__status--active .project-card__status-dot {
+    animation: flicker 2s ease-in-out infinite;
+  }
+
+  .project-card__name {
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.9;
+  }
+
+  .project-card__body {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-lg);
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-card__desc {
+    font-size: clamp(1.125rem, 2vw, 1.375rem);
+    color: var(--gray-light);
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+  }
+
+  .project-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .project-card__tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border);
+    color: var(--gray-light);
+  }
+
+  .project-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-decoration: none;
+    transition: gap 0.3s;
+  }
+
+  .project-card__link:hover {
+    gap: 1.25rem;
+    color: var(--accent);
+  }
+
+  .project-card__goals-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    margin-bottom: var(--space-sm);
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-card__goals {
+    list-style: none;
+  }
+
+  .project-card__goal {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--gray-light);
+    line-height: 1.6;
+  }
+
+  .project-card__goal-index {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--accent);
+    opacity: 0.6;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  /* ====== UPCOMING ====== */
+  .projects__upcoming {
+    text-align: center;
+    padding: var(--space-lg);
+    position: relative;
+  }
+
+  .projects__upcoming-border {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: var(--space-lg);
+    position: relative;
+  }
+
+  .projects__upcoming-border::before {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--black);
+    padding: 0 1rem;
+    color: var(--gray);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+  }
+
+  /* ====== BUTTONS (shared) ====== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    color: var(--gray-light);
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-101%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+  }
+
+  .btn:hover::before {
+    transform: translateX(0);
+  }
+
+  .btn:hover {
+    color: var(--black);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .project-card {
+      padding: var(--space-md);
+    }
+
+    .project-card__body {
+      grid-template-columns: 1fr;
+    }
+
+    .hide-mobile {
+      display: none;
+    }
+  }
+</style>

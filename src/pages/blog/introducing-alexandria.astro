@@ -1,0 +1,182 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Introducing Alexandria — IFFTU">
+  <article class="post">
+    <div class="post__inner container">
+      <header class="post__header">
+        <a href="/blog" class="post__back text-mono animate-reveal delay-1">&larr; BACK TO BLOG</a>
+        <div class="post__meta animate-reveal delay-2">
+          <span class="text-mono">FEB 01, 2025</span>
+          <span class="post__sep">/</span>
+          <span class="text-mono">5 MIN READ</span>
+          <span class="post__sep">/</span>
+          <span class="text-mono" style="color: var(--accent);">ANNOUNCEMENT</span>
+        </div>
+        <h1 class="post__title text-display animate-reveal delay-3">INTRODUCING<br />ALEXANDRIA</h1>
+      </header>
+
+      <div class="post__body animate-reveal delay-4">
+        <p class="post__lede text-serif">
+          A decentralized knowledge preservation system built to outlast any
+          institution. The library that never burns is now under active development.
+        </p>
+
+        <p>
+          The Library of Alexandria was one of the ancient world's greatest
+          achievements — and its destruction one of history's greatest losses.
+          For centuries, a single fire could erase the collective knowledge of
+          civilizations.
+        </p>
+
+        <p>
+          Today, the threat is different but the risk is the same. Knowledge
+          isn't stored in scrolls anymore — it's stored on servers owned by
+          corporations, governed by terms of service, and subject to the whims
+          of the market and political pressure.
+        </p>
+
+        <h2>WHAT IS ALEXANDRIA?</h2>
+
+        <p>
+          Alexandria is a decentralized, peer-to-peer knowledge preservation
+          system. No single server. No single owner. No single point of failure.
+          Documents are cryptographically verified, distributed across a global
+          network, and accessible to anyone.
+        </p>
+
+        <p>
+          Think of it as a library that exists everywhere and nowhere. A library
+          that can't be burned because there is no single building to set fire
+          to. Every node is a backup. Every participant is a librarian.
+        </p>
+
+        <h2>CORE PRINCIPLES</h2>
+
+        <p>
+          <strong>Censorship resistance.</strong> No government, corporation, or
+          individual can remove content from Alexandria unilaterally. The network
+          decides, not a boardroom.
+        </p>
+
+        <p>
+          <strong>Cryptographic integrity.</strong> Every document is
+          hash-verified. You know it hasn't been tampered with. The truth
+          doesn't need permissions.
+        </p>
+
+        <p>
+          <strong>Offline-first.</strong> Alexandria works without an internet
+          connection. Because access to knowledge shouldn't depend on access to
+          infrastructure.
+        </p>
+
+        <h2>CURRENT STATUS</h2>
+
+        <p>
+          Alexandria is in active development. We're building the core protocol,
+          designing the peer discovery mechanism, and prototyping the content
+          verification system. The code is open source and available on GitHub.
+        </p>
+
+        <p>
+          We'll be publishing regular development updates here. If you want to
+          contribute, check out the repository or reach out through our contact
+          page.
+        </p>
+
+        <div class="post__end">///</div>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .post {
+    padding: calc(6rem + var(--space-xl)) 0 var(--space-xl);
+  }
+
+  .post__inner {
+    max-width: 740px;
+  }
+
+  .post__header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .post__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gray);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+    transition: color 0.2s;
+  }
+
+  .post__back:hover {
+    color: var(--accent);
+  }
+
+  .post__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: var(--space-md);
+    color: var(--gray);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+  }
+
+  .post__sep {
+    color: var(--border);
+  }
+
+  .post__title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.9;
+  }
+
+  .post__body {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--gray-light);
+  }
+
+  .post__lede {
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--accent);
+  }
+
+  .post__body p {
+    margin-bottom: 1.5rem;
+  }
+
+  .post__body h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    margin: var(--space-lg) 0 var(--space-sm);
+  }
+
+  .post__body strong {
+    color: var(--white);
+    font-weight: 700;
+  }
+
+  .post__end {
+    text-align: center;
+    margin-top: var(--space-xl);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--accent);
+    letter-spacing: 0.5em;
+  }
+</style>

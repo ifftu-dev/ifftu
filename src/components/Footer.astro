@@ -1,0 +1,114 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__border"></div>
+  <div class="footer__inner container">
+    <div class="footer__left">
+      <p class="footer__motto">"I FIGHT FOR THE USERS"</p>
+      <p class="footer__copy">&copy; {year} IFFTU — ALL RIGHTS RESERVED</p>
+    </div>
+    <div class="footer__right">
+      <div class="footer__links">
+        <a href="https://github.com/ifftu" target="_blank" rel="noopener">GITHUB</a>
+        <a href="mailto:hello@ifftu.dev">EMAIL</a>
+        <a href="/blog">BLOG</a>
+      </div>
+      <p class="footer__tagline">OPEN SOURCE. TRANSPARENT. FOR HUMANITY.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: var(--space-lg) 0 var(--space-md);
+    margin-top: var(--space-xl);
+    position: relative;
+  }
+
+  .footer__border {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer__border::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 100%;
+    background: var(--accent);
+  }
+
+  .footer__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--space-md);
+  }
+
+  .footer__motto {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer__copy {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+  }
+
+  .footer__right {
+    text-align: right;
+  }
+
+  .footer__links {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: 0.5rem;
+    justify-content: flex-end;
+  }
+
+  .footer__links a {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--gray-light);
+    padding: 0.35rem 0.75rem;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .footer__links a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .footer__tagline {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+  }
+
+  @media (max-width: 768px) {
+    .footer__inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer__right {
+      text-align: left;
+    }
+
+    .footer__links {
+      justify-content: flex-start;
+    }
+  }
+</style>

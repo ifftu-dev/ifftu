@@ -1,0 +1,196 @@
+---
+const currentPath = Astro.url.pathname;
+
+const links = [
+  { href: '/', label: 'INDEX' },
+  { href: '/projects', label: 'PROJECTS' },
+  { href: '/blog', label: 'BLOG' },
+  { href: '/contact', label: 'CONTACT' },
+];
+---
+
+<nav class="nav">
+  <div class="nav__inner container">
+    <a href="/" class="nav__logo" aria-label="IFFTU Home">
+      <span class="nav__logo-mark">//</span>
+      <span class="nav__logo-text">IFFTU</span>
+    </a>
+
+    <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="nav__toggle-line"></span>
+      <span class="nav__toggle-line"></span>
+    </button>
+
+    <ul class="nav__links">
+      {links.map((link, i) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={['nav__link', { 'nav__link--active': currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }]}
+          >
+            <span class="nav__link-index">{String(i).padStart(2, '0')}</span>
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav__logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: var(--white);
+    transition: color 0.15s;
+  }
+
+  .nav__logo:hover {
+    color: var(--accent);
+  }
+
+  .nav__logo-mark {
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .nav__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: 1px solid var(--border);
+    padding: 0.75rem;
+    cursor: pointer;
+  }
+
+  .nav__toggle-line {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--white);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .nav__links {
+    display: flex;
+    list-style: none;
+    gap: 0;
+  }
+
+  .nav__link {
+    display: block;
+    padding: 0.5rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-light);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .nav__link:hover {
+    color: var(--white);
+    border-color: var(--border);
+  }
+
+  .nav__link--active {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .nav__link-index {
+    color: var(--gray);
+    margin-right: 0.5rem;
+    font-size: 0.6rem;
+  }
+
+  .nav__link--active .nav__link-index {
+    color: var(--accent);
+    opacity: 0.6;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .nav__toggle {
+      display: flex;
+    }
+
+    .nav__links {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--black);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 999;
+    }
+
+    .nav__links.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .nav__link {
+      font-size: 1rem;
+      padding: 1rem 2rem;
+    }
+
+    .nav__link-index {
+      font-size: 0.75rem;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.nav__toggle');
+  const links = document.querySelector('.nav__links');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = links?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close menu on link click (mobile)
+  links?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      links.classList.remove('is-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
