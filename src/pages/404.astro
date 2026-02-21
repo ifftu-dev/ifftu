@@ -1,0 +1,232 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="404 — IFFTU">
+  <section class="lost">
+    <div class="lost__scan-line"></div>
+    <div class="lost__inner container">
+      <div class="lost__pre text-mono animate-reveal delay-1">
+        <span style="color: var(--accent);">//</span> SYSTEM ERROR
+      </div>
+
+      <h1 class="lost__code text-display animate-reveal delay-2">
+        4<span class="lost__zero">0</span>4
+      </h1>
+
+      <div class="lost__terminal animate-reveal delay-3">
+        <div class="lost__terminal-bar">
+          <span class="lost__terminal-dot"></span>
+          <span class="lost__terminal-dot"></span>
+          <span class="lost__terminal-dot"></span>
+          <span class="lost__terminal-title text-mono">ifftu_shell</span>
+        </div>
+        <div class="lost__terminal-body" id="terminal">
+          <div class="lost__line"><span class="lost__prompt">visitor@ifftu:~$</span> locate requested_page</div>
+          <div class="lost__line lost__line--error">ERROR: File not found in any known directory</div>
+          <div class="lost__line"><span class="lost__prompt">visitor@ifftu:~$</span> grep -r "this page" /dev/reality</div>
+          <div class="lost__line lost__line--dim">searching...</div>
+          <div class="lost__line lost__line--error">0 results. The page you seek does not exist.</div>
+          <div class="lost__line">&nbsp;</div>
+          <div class="lost__line"><span class="lost__prompt">visitor@ifftu:~$</span> cat /etc/motd</div>
+          <div class="lost__line lost__line--accent">You have wandered outside the grid.</div>
+          <div class="lost__line lost__line--accent">The system sees you. The system wants to help.</div>
+          <div class="lost__line">&nbsp;</div>
+          <div class="lost__line"><span class="lost__prompt">visitor@ifftu:~$</span> ls /home/ifftu/</div>
+          <div class="lost__line lost__line--links" id="nav-links">
+            <a href="/">index</a>
+            <a href="/projects">projects</a>
+            <a href="/blog">blog</a>
+            <a href="/contact">contact</a>
+          </div>
+          <div class="lost__line">&nbsp;</div>
+          <div class="lost__line">
+            <span class="lost__prompt">visitor@ifftu:~$</span>
+            <span class="lost__cursor">_</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="lost__subtext text-mono animate-reveal delay-4">
+        EVERY DEAD END IS A NEW DIRECTION
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lost {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: calc(6rem + var(--space-xl)) 0 var(--space-xl);
+  }
+
+  .lost__scan-line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-dim);
+    animation: scan-line 4s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .lost::after {
+    content: '404';
+    position: absolute;
+    bottom: -10%;
+    right: -5%;
+    font-family: var(--font-display);
+    font-size: clamp(15rem, 30vw, 35rem);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    opacity: 0.1;
+    pointer-events: none;
+    line-height: 0.8;
+  }
+
+  .lost__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+
+  .lost__pre {
+    color: var(--gray);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-md);
+  }
+
+  .lost__code {
+    font-size: clamp(6rem, 18vw, 14rem);
+    line-height: 0.85;
+    margin-bottom: var(--space-lg);
+  }
+
+  .lost__zero {
+    color: var(--accent);
+    position: relative;
+  }
+
+  .lost__zero::after {
+    content: '';
+    position: absolute;
+    bottom: 0.05em;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent);
+    animation: flicker 2s ease-in-out infinite;
+  }
+
+  /* Terminal */
+  .lost__terminal {
+    border: 1px solid var(--border);
+    margin-bottom: var(--space-lg);
+    overflow: hidden;
+  }
+
+  .lost__terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .lost__terminal-dot {
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .lost__terminal-dot:first-child {
+    border-color: var(--accent);
+    background: var(--accent);
+  }
+
+  .lost__terminal-title {
+    margin-left: auto;
+    font-size: 0.55rem;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+  }
+
+  .lost__terminal-body {
+    padding: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 2;
+  }
+
+  .lost__line {
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .lost__prompt {
+    color: var(--accent);
+    margin-right: 0.5rem;
+  }
+
+  .lost__line--error {
+    color: var(--accent);
+  }
+
+  .lost__line--dim {
+    color: var(--gray);
+    font-style: italic;
+  }
+
+  .lost__line--accent {
+    color: var(--white);
+  }
+
+  .lost__line--links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .lost__line--links a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.2s;
+    padding: 0.15rem 0;
+    border-bottom: 1px solid transparent;
+  }
+
+  .lost__line--links a:hover {
+    color: var(--white);
+    border-bottom-color: var(--accent);
+  }
+
+  .lost__cursor {
+    color: var(--accent);
+    animation: cursor-blink 1s step-end infinite;
+  }
+
+  .lost__subtext {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .lost__terminal-body {
+      padding: 1rem;
+      font-size: 0.65rem;
+    }
+
+    .lost__line--links {
+      gap: 1rem;
+    }
+  }
+</style>

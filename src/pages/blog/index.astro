@@ -10,22 +10,7 @@ const posts = [
     tags: ['MANIFESTO', 'OPEN SOURCE'],
     readTime: '8 MIN',
   },
-  {
-    slug: 'introducing-alexandria',
-    title: 'INTRODUCING ALEXANDRIA',
-    date: '2025-02-01',
-    excerpt: 'A decentralized knowledge preservation system built to outlast any institution. The library that never burns is now under active development.',
-    tags: ['ALEXANDRIA', 'ANNOUNCEMENT'],
-    readTime: '5 MIN',
-  },
-  {
-    slug: 'transparency-report-001',
-    title: 'TRANSPARENCY REPORT #001',
-    date: '2025-01-20',
-    excerpt: 'Our first transparency report. Where the money goes, what we\'re working on, and every decision we made this month — explained.',
-    tags: ['TRANSPARENCY', 'REPORT'],
-    readTime: '12 MIN',
-  },
+
 ];
 
 function formatDate(dateStr: string) {
@@ -78,6 +63,30 @@ function formatDate(dateStr: string) {
             <div class="blog-card__arrow">&rarr;</div>
           </a>
         ))}
+      </div>
+
+      <div class="teaser animate-reveal delay-5">
+        <div class="teaser__border"></div>
+        <div class="teaser__inner">
+          <div class="teaser__status">
+            <span class="teaser__dot"></span>
+            <span class="text-mono">INCOMING TRANSMISSION</span>
+          </div>
+          <h3 class="teaser__title text-display">
+            <span class="teaser__redacted">//////</span>
+            ALEXANDRIA
+            <span class="teaser__redacted">//////</span>
+          </h3>
+          <p class="teaser__text">
+            The library that never burns.<br />
+            <span class="teaser__glitch" data-text="Something is being built.">Something is being built.</span>
+          </p>
+          <div class="teaser__meta text-mono">
+            <span>STATUS: <span style="color: var(--accent);">CLASSIFIED</span></span>
+            <span class="teaser__sep">/</span>
+            <span>ETA: <span class="teaser__cursor">_</span></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -246,6 +255,146 @@ function formatDate(dateStr: string) {
     z-index: 1;
   }
 
+  /* ====== TEASER ====== */
+  .teaser {
+    margin-top: var(--space-xl);
+    position: relative;
+  }
+
+  .teaser__border {
+    height: 1px;
+    background: var(--border);
+    margin-bottom: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .teaser__border::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 100%;
+    background: var(--accent);
+    animation: teaser-scan 3s ease-in-out infinite;
+  }
+
+  @keyframes teaser-scan {
+    0% { left: 0; opacity: 1; }
+    50% { left: calc(100% - 60px); opacity: 0.5; }
+    100% { left: 0; opacity: 1; }
+  }
+
+  .teaser__inner {
+    border: 1px solid var(--border);
+    padding: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 34, 0, 0.01);
+  }
+
+  .teaser__inner::after {
+    content: '?';
+    position: absolute;
+    bottom: -25%;
+    right: -5%;
+    font-family: var(--font-display);
+    font-size: 25rem;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    opacity: 0.1;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .teaser__status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-md);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+  }
+
+  .teaser__dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    animation: flicker 1.5s ease-in-out infinite;
+  }
+
+  .teaser__title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 0.9;
+    margin-bottom: var(--space-md);
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+
+  .teaser__redacted {
+    color: var(--border);
+    font-size: 0.6em;
+    letter-spacing: 0.2em;
+    vertical-align: middle;
+    margin: 0 0.25em;
+  }
+
+  .teaser__text {
+    color: var(--gray-light);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: var(--space-md);
+    position: relative;
+    z-index: 1;
+  }
+
+  .teaser__glitch {
+    position: relative;
+    display: inline-block;
+  }
+
+  .teaser__glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 2px;
+    top: 0;
+    color: var(--accent);
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    animation: glitch-flicker 4s ease-in-out infinite;
+  }
+
+  @keyframes glitch-flicker {
+    0%, 92%, 100% { opacity: 0; }
+    93% { opacity: 0.8; clip-path: inset(20% 0 40% 0); transform: translateX(-2px); }
+    94% { opacity: 0; }
+    95% { opacity: 0.6; clip-path: inset(60% 0 10% 0); transform: translateX(3px); }
+    96% { opacity: 0; }
+  }
+
+  .teaser__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    position: relative;
+    z-index: 1;
+  }
+
+  .teaser__sep {
+    color: var(--border);
+  }
+
+  .teaser__cursor {
+    color: var(--accent);
+    animation: cursor-blink 1s step-end infinite;
+  }
+
   @media (max-width: 768px) {
     .blog-card {
       grid-template-columns: 1fr;
@@ -263,6 +412,10 @@ function formatDate(dateStr: string) {
 
     .hide-mobile {
       display: none;
+    }
+
+    .teaser__inner {
+      padding: var(--space-md);
     }
   }
 </style>

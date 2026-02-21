@@ -131,16 +131,20 @@ import Base from '../layouts/Base.astro';
         <div class="featured__project-header">
           <span class="featured__status">
             <span class="featured__status-dot"></span>
-            IN DEVELOPMENT
+            INCOMING TRANSMISSION
           </span>
           <span class="text-mono" style="color: var(--gray);">2025 —</span>
         </div>
 
-        <h2 class="featured__project-name text-display">ALEXANDRIA</h2>
+        <h2 class="featured__project-name text-display">
+          <span class="featured__redacted">//////</span>
+          ALEXANDRIA
+          <span class="featured__redacted">//////</span>
+        </h2>
 
         <p class="featured__project-desc text-serif">
-          The library that never burns. A decentralized, censorship-resistant
-          knowledge preservation system built to outlast institutions.
+          The library that never burns. Something is being assembled.
+          Details remain classified.
         </p>
 
         <div class="featured__project-meta">
@@ -149,8 +153,14 @@ import Base from '../layouts/Base.astro';
           <span class="featured__tag">KNOWLEDGE PRESERVATION</span>
         </div>
 
+        <div class="featured__classified text-mono">
+          <span>STATUS: <span style="color: var(--accent);">CLASSIFIED</span></span>
+          <span class="featured__classified-sep">/</span>
+          <span>ETA: <span class="featured__cursor">_</span></span>
+        </div>
+
         <a href="/projects" class="featured__project-link">
-          LEARN MORE
+          VIEW PROJECTS
           <span class="featured__project-arrow">&rarr;</span>
         </a>
       </div>
@@ -502,7 +512,7 @@ import Base from '../layouts/Base.astro';
   }
 
   .featured__project::after {
-    content: 'A';
+    content: '?';
     position: absolute;
     bottom: -20%;
     right: -5%;
@@ -601,6 +611,35 @@ import Base from '../layouts/Base.astro';
 
   .featured__project-link:hover .featured__project-arrow {
     transform: translateX(4px);
+  }
+
+  .featured__redacted {
+    color: var(--border);
+    font-size: 0.45em;
+    letter-spacing: 0.2em;
+    vertical-align: middle;
+    margin: 0 0.2em;
+  }
+
+  .featured__classified {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    margin-bottom: var(--space-md);
+    position: relative;
+    z-index: 1;
+  }
+
+  .featured__classified-sep {
+    color: var(--border);
+  }
+
+  .featured__cursor {
+    color: var(--accent);
+    animation: cursor-blink 1s step-end infinite;
   }
 
   /* ====== CTA ====== */
