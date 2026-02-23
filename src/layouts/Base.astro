@@ -28,14 +28,28 @@ const { title, description = 'IFFTU — I Fight For The Users. Using cutting-edg
   <ViewTransitions />
 </head>
 <body>
-  <Nav />
+  <Nav transition:animate="none" />
   <main>
     <slot />
   </main>
-  <Footer />
+  <Footer transition:persist />
 
   <script>
+    let isFirstLoad = true;
+
     function initRevealAnimations() {
+      if (!isFirstLoad) {
+        // On client-side navigation, show elements immediately — no staggered replay
+        document.querySelectorAll<HTMLElement>('.animate-reveal:not(.is-visible), .animate-reveal-left:not(.is-visible)').forEach((el) => {
+          el.classList.add('is-visible');
+          el.style.animationDelay = '0s';
+          el.style.animationDuration = '0.3s';
+        });
+        return;
+      }
+
+      isFirstLoad = false;
+
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -53,7 +67,6 @@ const { title, description = 'IFFTU — I Fight For The Users. Using cutting-edg
       });
     }
 
-    // Run on initial load and after each client-side navigation
     initRevealAnimations();
     document.addEventListener('astro:page-load', initRevealAnimations);
   </script>
