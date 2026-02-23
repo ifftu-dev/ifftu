@@ -1,0 +1,41 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  date: string;
+  readTime: string;
+  tags: string[];
+  excerpt: string;
+}
+
+const { title, date, readTime, tags, excerpt } = Astro.props;
+
+function formatDate(dateStr: string) {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).toUpperCase();
+}
+---
+
+<Base title={`${title} — IFFTU`} description={excerpt}>
+  <article class="post">
+    <div class="post__inner container">
+      <header class="post__header">
+        <a href="/blog" class="post__back text-mono animate-reveal delay-1">&larr; BACK TO BLOG</a>
+        <div class="post__meta animate-reveal delay-2">
+          <span class="text-mono">{formatDate(date)}</span>
+          <span class="post__sep">/</span>
+          <span class="text-mono">{readTime} READ</span>
+          <span class="post__sep">/</span>
+          <span class="text-mono" style="color: var(--accent);">{tags[0]}</span>
+        </div>
+        <h1 class="post__title text-display animate-reveal delay-3">{title}</h1>
+      </header>
+
+      <div class="post__body animate-reveal delay-4">
+        <slot />
+        <div class="post__end">///</div>
+      </div>
+    </div>
+  </article>
+</Base>

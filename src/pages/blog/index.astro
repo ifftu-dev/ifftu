@@ -1,17 +1,9 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
-const posts = [
-  {
-    slug: 'why-we-fight',
-    title: 'WHY WE FIGHT',
-    date: '2025-02-15',
-    excerpt: 'The internet promised liberation. It delivered surveillance capitalism. Here\'s why we started IFFTU and what we intend to do about it.',
-    tags: ['MANIFESTO', 'OPEN SOURCE'],
-    readTime: '8 MIN',
-  },
-
-];
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
@@ -20,7 +12,7 @@ function formatDate(dateStr: string) {
 ---
 
 <Base title="Blog — IFFTU">
-  <section class="page-header">
+  <section class="page-header" data-watermark="B">
     <div class="page-header__inner container">
       <div class="page-header__pre text-mono animate-reveal delay-1">
         <span style="color: var(--accent);">//</span> DISPATCHES
@@ -39,22 +31,22 @@ function formatDate(dateStr: string) {
     <div class="blog__inner container">
       <div class="blog__list">
         {posts.map((post, i) => (
-          <a href={`/blog/${post.slug}`} class={`blog-card animate-reveal delay-${i + 2}`}>
+          <a href={`/blog/${post.id}`} class={`blog-card animate-reveal delay-${i + 2}`}>
             <div class="blog-card__index text-display">{String(i + 1).padStart(2, '0')}</div>
 
             <div class="blog-card__content">
               <div class="blog-card__meta">
-                <span class="text-mono">{formatDate(post.date)}</span>
+                <span class="text-mono">{formatDate(post.data.date)}</span>
                 <span class="blog-card__sep">/</span>
-                <span class="text-mono">{post.readTime}</span>
+                <span class="text-mono">{post.data.readTime}</span>
               </div>
 
-              <h2 class="blog-card__title">{post.title}</h2>
+              <h2 class="blog-card__title">{post.data.title}</h2>
 
-              <p class="blog-card__excerpt">{post.excerpt}</p>
+              <p class="blog-card__excerpt">{post.data.excerpt}</p>
 
               <div class="blog-card__tags">
-                {post.tags.map((tag: string) => (
+                {post.data.tags.map((tag: string) => (
                   <span class="blog-card__tag">{tag}</span>
                 ))}
               </div>
@@ -93,51 +85,6 @@ function formatDate(dateStr: string) {
 </Base>
 
 <style>
-  /* ====== PAGE HEADER ====== */
-  .page-header {
-    padding: calc(6rem + var(--space-xl)) 0 var(--space-lg);
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .page-header::after {
-    content: 'B';
-    position: absolute;
-    top: 10%;
-    right: -5%;
-    font-family: var(--font-display);
-    font-size: clamp(20rem, 35vw, 40rem);
-    color: transparent;
-    -webkit-text-stroke: 1px var(--border);
-    opacity: 0.15;
-    pointer-events: none;
-    line-height: 0.8;
-  }
-
-  .page-header__pre {
-    color: var(--gray);
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    margin-bottom: var(--space-md);
-  }
-
-  .page-header__title {
-    font-size: clamp(4rem, 12vw, 9rem);
-    line-height: 0.9;
-    margin-bottom: var(--space-md);
-  }
-
-  .page-header__desc {
-    color: var(--gray-light);
-    max-width: 520px;
-    line-height: 1.8;
-  }
-
-  .hide-mobile {
-    display: inline;
-  }
-
   /* ====== BLOG LIST ====== */
   .blog {
     padding: var(--space-xl) 0;
@@ -408,10 +355,6 @@ function formatDate(dateStr: string) {
     }
 
     .blog-card__arrow {
-      display: none;
-    }
-
-    .hide-mobile {
       display: none;
     }
 

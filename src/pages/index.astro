@@ -309,65 +309,6 @@ import Base from '../layouts/Base.astro';
     background: linear-gradient(to bottom, var(--accent), transparent);
   }
 
-  .hide-mobile {
-    display: inline;
-  }
-
-  /* ====== BUTTONS ====== */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1px solid var(--border);
-    transition: all 0.25s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--accent);
-    transform: translateX(-101%);
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: -1;
-  }
-
-  .btn:hover::before {
-    transform: translateX(0);
-  }
-
-  .btn:hover {
-    color: var(--black);
-    border-color: var(--accent);
-  }
-
-  .btn--primary {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .btn--ghost {
-    color: var(--gray-light);
-  }
-
-  .btn--large {
-    padding: 1.25rem 3rem;
-    font-size: 0.8rem;
-  }
-
-  .btn__index {
-    font-size: 0.6rem;
-    opacity: 0.5;
-  }
-
   /* ====== MANIFESTO ====== */
   .manifesto {
     padding: var(--space-xl) 0;
@@ -699,10 +640,6 @@ import Base from '../layouts/Base.astro';
 
     .principles__grid {
       grid-template-columns: 1fr;
-    }
-
-    .hide-mobile {
-      display: none;
     }
 
     .featured__project {
