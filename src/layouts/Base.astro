@@ -26,6 +26,15 @@ const { title, description = 'IFFTU — I Fight For The Users. Using cutting-edg
   <meta property="og:type" content="website" />
   <link rel="alternate" type="application/rss+xml" title="IFFTU" href="/rss.xml" />
   <ViewTransitions />
+  <style is:global>
+    /* Speed up view transitions — default fade is too slow for a static site */
+    ::view-transition-old(root) {
+      animation-duration: 100ms;
+    }
+    ::view-transition-new(root) {
+      animation-duration: 100ms;
+    }
+  </style>
 </head>
 <body>
   <Nav transition:animate="none" />
