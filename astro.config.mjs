@@ -6,4 +6,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://ifftu.dev',
   integrations: [sitemap()],
+  prefetch: {
+    defaultStrategy: 'hover',
+    prefetchAll: true,
+  },
 });
