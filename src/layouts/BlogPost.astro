@@ -18,6 +18,16 @@ function formatDate(dateStr: string) {
 ---
 
 <Base title={`${title} — IFFTU`} description={excerpt}>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description: excerpt,
+    datePublished: date,
+    author: { '@type': 'Organization', name: 'IFFTU', url: 'https://ifftu.dev' },
+    publisher: { '@type': 'Organization', name: 'IFFTU', url: 'https://ifftu.dev' },
+    keywords: tags.join(', '),
+  })} />
   <article class="post">
     <div class="post__inner container">
       <header class="post__header">

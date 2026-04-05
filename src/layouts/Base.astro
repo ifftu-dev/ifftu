@@ -7,9 +7,20 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
 }
 
-const { title, description = 'IFFTU — I Fight For The Users. Using cutting-edge technology to solve humanity\'s biggest problems. Open. Transparent. For everyone.' } = Astro.props;
+const {
+  title,
+  description = 'IFFTU — I Fight For The Users. Using cutting-edge technology to solve humanity\'s biggest problems. Open. Transparent. For everyone.',
+  canonicalPath,
+  ogImage = '/og-image.png',
+} = Astro.props;
+
+const siteUrl = 'https://ifftu.dev';
+const canonicalUrl = canonicalPath ? `${siteUrl}${canonicalPath}` : `${siteUrl}${Astro.url.pathname}`;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---
 
 <!DOCTYPE html>
@@ -20,11 +31,52 @@ const { title, description = 'IFFTU — I Fight For The Users. Using cutting-edg
   <meta name="description" content={description} />
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href={canonicalUrl} />
   <meta name="theme-color" content="#0a0a0a" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:site_name" content="IFFTU" />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+
+  <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="IFFTU" href="/rss.xml" />
+
+  <!-- JSON-LD Organization (site-wide) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'IFFTU',
+    alternateName: 'I Fight For The Users',
+    url: siteUrl,
+    logo: `${siteUrl}/favicon.svg`,
+    description: 'An open source collective using cutting-edge technology to solve humanity\'s biggest problems.',
+    sameAs: [
+      'https://github.com/ifftu-dev',
+    ],
+  })} />
+
+  <!-- JSON-LD WebPage (per-page) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description: description,
+    url: canonicalUrl,
+    isPartOf: { '@type': 'WebSite', name: 'IFFTU', url: siteUrl },
+  })} />
+
   <ViewTransitions />
   <style is:global>
     /* Speed up view transitions — default fade is too slow for a static site */
