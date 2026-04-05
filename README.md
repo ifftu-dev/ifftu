@@ -1,8 +1,12 @@
 # IFFTU.dev
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d4be194b-9583-4190-b8a4-0e21a118dad2/deploy-status)](https://app.netlify.com/projects/ifftu/deploys)
+
 **"I Fight For The Users"**
 
 Website for IFFTU, an open source collective using cutting-edge technology to solve humanity's biggest problems. Open. Transparent. Uncompromising.
+
+**Live at [ifftu.dev](https://www.ifftu.dev)**
 
 ## Stack
 
@@ -71,6 +75,9 @@ Animations are scroll-triggered via IntersectionObserver. A film grain overlay a
 *Status: In Development*
 
 A decentralized, censorship-resistant knowledge preservation system. The library that never burns.
+
+- **App**: [github.com/ifftu-dev/alexandria](https://github.com/ifftu-dev/alexandria)
+- **Website**: [alexandria.ifftu.dev](https://alexandria.ifftu.dev) ([repo](https://github.com/ifftu-dev/alexandria-website))
 
 ## License
 
