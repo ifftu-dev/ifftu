@@ -47,11 +47,9 @@ These layers reinforce each other. Verifiable credentials make the reputation sy
 
 Everything is open-source under active development:
 
-**Vision Paper** — A document explaining the motivation, the design, and why this matters for learners, educators, employers, and policymakers. Start here if you want to understand the *why*.
+**[Vision Paper](https://github.com/ifftu-dev/alexandria/blob/main/docs/vision.md)** — A document explaining the motivation, the design, and why this matters for learners, educators, employers, and policymakers. Start here if you want to understand the *why*.
 
-**Protocol Specification** — The normative technical spec: P2P wire formats, 6 gossip topics, validation pipeline, peer scoring, evidence model, governance rules, and threat mitigations. Start here if you want to understand the *how* or build a conforming implementation.
-
-**Reference Implementation** — A working Tauri v2 application (Rust backend, Vue 3 frontend, SQLite, iroh, libp2p, Cardano via pallas) with native builds for desktop and mobile.
+**[Protocol Specification](https://github.com/ifftu-dev/alexandria/blob/main/docs/protocol-specification.md)** — The normative technical spec: P2P wire formats, 6 gossip topics, validation pipeline, peer scoring, evidence model, governance rules, and threat mitigations. Start here if you want to understand the *how* or build a conforming implementation.
 
 → [github.com/ifftu-dev/alexandria](https://github.com/ifftu-dev/alexandria)
 → [alexandria.ifftu.dev](https://alexandria.ifftu.dev/)
