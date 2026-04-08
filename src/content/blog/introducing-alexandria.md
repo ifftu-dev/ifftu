@@ -33,7 +33,7 @@ At its core, Alexandria is a **Tauri v2 application** — a single binary that b
 
 **A learning platform** — rich courses with HTML, video, and interactive quizzes, stored in an iroh content-addressed blob store (BLAKE3 hashes). Published courses resolve from public URLs and propagate across the peer-to-peer network via GossipSub. Fresh installs bootstrap a bundled public catalog before network discovery catches up.
 
-**A credential system** — when you demonstrate a skill (through assessments, projects, or peer-attested evidence), you earn a SkillProof: a cryptographic credential scoped to a specific skill at a specific Bloom's taxonomy level, backed by weighted evidence with confidence scores. Proofs can be minted as NFTs on Cardano (Conway era) with CIP-25 metadata — independently verifiable on-chain without the platform.
+**A credential system** — when you demonstrate a skill (through assessments, projects, or peer-attested evidence), you earn a SkillProof: a cryptographic credential scoped to a specific skill at a specific Bloom's taxonomy level, backed by weighted evidence with confidence scores. Proofs can be minted as NFTs on Cardano (Conway era, preprod testnet) with CIP-25 metadata — independently verifiable on-chain without the platform.
 
 **A reputation system** — instructor impact derived from learner outcomes, scoped to `(subject, role, skill, proficiency_level)`. Exposed as a distribution with confidence bounds — no global scores, no star ratings, no follower counts. Reputation snapshots can be anchored on-chain as CIP-68 soulbound tokens.
 
@@ -63,13 +63,15 @@ alexandria/
 ├── src-tauri/        # Rust backend (Tauri v2)
 │   └── src/
 │       ├── cardano/  # Blockfrost client, Conway tx building, NFT policies
-│       ├── commands/ # ~160 IPC command handlers (frontend ↔ backend)
+│       ├── commands/ # ~200 IPC command handlers (frontend ↔ backend)
 │       ├── crypto/   # BIP-39 wallet, vault (Stronghold / portable), Ed25519
 │       ├── db/       # SQLite (53 tables, 19 migrations, seed data)
 │       ├── domain/   # Business logic (courses, evidence, governance, ...)
 │       ├── evidence/ # Aggregation, attestation, challenges, reputation
 │       ├── ipfs/     # iroh node, IPFS gateway fallback, CID resolution
-│       └── p2p/      # libp2p swarm — DHT, relay, gossip, peer exchange
+│       ├── p2p/      # libp2p swarm — DHT, relay, gossip, peer exchange
+│       ├── classroom/ # Encrypted group messaging, member management
+│       └── tutoring/  # Live tutoring sessions over QUIC (iroh-live)
 ├── src/              # Vue 3 + TypeScript frontend
 │   ├── pages/        # 25 pages
 │   ├── components/   # UI components
@@ -102,19 +104,19 @@ The reputation model — scoping reputation to `(subject, role, skill, proficien
 
 The P2P protocol — a fully specified, implementation-complete protocol with 6 gossip topics, a 6-step validation pipeline (signature, identity, freshness, dedup, schema, authority), per-topic peer scoring, and Ed25519 message signing linked to Cardano stake addresses.
 
-The credential ownership model — credentials live in the learner's local SQLite and iroh store. Proofs can be minted on Cardano as NFTs (Conway era, CIP-25 metadata). No server holds or controls credential data.
+The credential ownership model — credentials live in the learner's local SQLite and iroh store. Proofs can be minted on Cardano as NFTs (Conway era, preprod testnet, CIP-25 metadata). No server holds or controls credential data.
 
 The offline-first architecture — every operation works without network access. Sync is opportunistic, not required.
 
 The Sentinel anti-cheat — client-side behavioral fingerprinting with three ML models (keystroke autoencoder, mouse trajectory CNN, face embedder), all trained on-device with zero external dependencies. Raw data never leaves the client.
 
-The test suite — 407 backend tests across crypto, database, P2P, evidence, cardano, and domain modules, plus ~1500 lines of stress tests covering high-volume gossip, concurrent validation, and adversarial inputs.
+The test suite — 423 backend tests across crypto, database, P2P, evidence, cardano, and domain modules, plus ~1500 lines of stress tests covering high-volume gossip, concurrent validation, and adversarial inputs.
+
+The governance smart contracts — all 7 Aiken validators (election, proposal, DAO minting/registry, vote minting, reputation minting, soulbound) are implemented and ready for preprod deployment.
 
 **What needs significant improvement:**
 
-Smart contracts are not implemented. Governance and credential operations currently use transaction metadata only — no on-chain validators. The full trust model would require 7 Aiken/Plutus v3 validators. Application-level and P2P validation provide meaningful protection, but on-chain enforcement is the complete solution.
-
-There are no frontend tests. The backend has 407 tests, but the Vue frontend has zero test coverage.
+There are no frontend tests. The backend has 423 tests, but the Vue frontend has zero test coverage.
 
 Content moderation doesn't exist. Any peer can publish any course to the catalog topic. The peer scoring system penalizes invalid messages, but there's no mechanism for reporting or removing objectionable content.
 
@@ -134,7 +136,7 @@ Alexandria needs help across every discipline, not just engineering.
 
 **If you're a cryptographer or security researcher:** The encrypted vault implementations (Stronghold on desktop, AES-256-GCM + Argon2id on mobile), the Ed25519 identity derivation from Cardano payment keys, and the Sentinel behavioral fingerprinting system all need adversarial review. A security audit has identified 32 findings — 21 have been fixed, 11 remain.
 
-**If you know Cardano/Aiken:** The 7 missing smart contract validators are the biggest gap between the current implementation and the full trust model.
+**If you know Cardano/Aiken:** The 7 governance validators are implemented but need adversarial testing, formal verification, and mainnet deployment planning.
 
 **If you work in policy or workforce development:** How would governments actually recognise blockchain-anchored skill credentials? What regulatory frameworks apply to decentralized education platforms?
 
