@@ -53,7 +53,8 @@ Everything is open-source under active development:
 
 **Reference Implementation** — A working Tauri v2 application (Rust backend, Vue 3 frontend, SQLite, iroh, libp2p, Cardano via pallas) with native builds for desktop and mobile.
 
-→ GitHub: github.com/ifftu-dev/alexandria
+→ [github.com/ifftu-dev/alexandria](https://github.com/ifftu-dev/alexandria)
+→ [alexandria.ifftu.dev](https://alexandria.ifftu.dev/)
 
 ---
 
