@@ -27,66 +27,75 @@ import Base from '../layouts/Base.astro';
           <div class="teaser-card__status-row">
             <span class="teaser-card__status">
               <span class="teaser-card__status-dot"></span>
-              INCOMING TRANSMISSION
+              ACTIVE DEVELOPMENT
             </span>
             <span class="text-mono" style="color: var(--gray); font-size: 0.7rem;">2025 —</span>
           </div>
           <h2 class="teaser-card__name text-display">
-            <span class="teaser-card__redacted">//////</span>
             ALEXANDRIA
-            <span class="teaser-card__redacted">//////</span>
           </h2>
         </div>
 
         <div class="teaser-card__body">
           <div class="teaser-card__desc-col">
             <p class="teaser-card__desc text-serif">
-              The library that never burns. A system is being assembled
-              in the open. Details are classified until launch.
+              A desktop and mobile application that turns every device into a full node
+              in a decentralized education network with verifiable, learner-owned credentials.
+              No servers. No gatekeepers. The library that never burns.
             </p>
 
             <div class="teaser-card__tags">
               <span class="teaser-card__tag">DECENTRALIZED</span>
               <span class="teaser-card__tag">OPEN SOURCE</span>
-              <span class="teaser-card__tag">KNOWLEDGE PRESERVATION</span>
-              <span class="teaser-card__tag teaser-card__tag--redacted">[REDACTED]</span>
+              <span class="teaser-card__tag">TAURI V2 + RUST</span>
+              <span class="teaser-card__tag">CARDANO</span>
+              <span class="teaser-card__tag">P2P</span>
             </div>
 
             <div class="teaser-card__meta text-mono">
-              <span>STATUS: <span style="color: var(--accent);">CLASSIFIED</span></span>
+              <span>STATUS: <span style="color: var(--accent);">OPEN SOURCE</span></span>
               <span class="teaser-card__sep">/</span>
-              <span>ETA: <span class="teaser-card__cursor">_</span></span>
+              <span>STACK: RUST / VUE 3 / LIBP2P / SQLITE</span>
+            </div>
+
+            <div class="teaser-card__links" style="margin-top: var(--space-md); display: flex; gap: 1rem;">
+              <a href="https://github.com/ifftu-dev/alexandria" class="btn btn--primary" target="_blank" rel="noopener">
+                GITHUB
+              </a>
+              <a href="/blog/introducing-alexandria" class="btn btn--ghost">
+                READ THE ANNOUNCEMENT
+              </a>
             </div>
           </div>
 
           <div class="teaser-card__objectives-col">
-            <h3 class="teaser-card__objectives-title text-mono">OBJECTIVES</h3>
+            <h3 class="teaser-card__objectives-title text-mono">WHAT IT DOES</h3>
             <ul class="teaser-card__objectives">
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">01</span>
-                <span class="teaser-card__redacted-line">////////////////////</span>
+                Decentralized learning platform — courses stored in iroh (BLAKE3), propagated via GossipSub
               </li>
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">02</span>
-                <span class="teaser-card__redacted-line">////////////////////////</span>
+                Verifiable credentials — SkillProofs scoped to Bloom's taxonomy levels, mintable as Cardano NFTs
               </li>
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">03</span>
-                <span class="teaser-card__redacted-line">/////////////////</span>
+                Reputation system — instructor impact as distributions with confidence bounds, no star ratings
               </li>
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">04</span>
-                <span class="teaser-card__redacted-line">//////////////////////</span>
+                Assessment integrity — Sentinel anti-cheat with on-device ML, raw data never leaves the client
               </li>
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">05</span>
-                <span class="teaser-card__redacted-line">/////////////////////////</span>
+                Offline-first — every operation works without network access, sync is opportunistic
               </li>
             </ul>
           </div>
         </div>
 
-        <div class="teaser-card__watermark text-display" aria-hidden="true">?</div>
+        <div class="teaser-card__watermark text-display" aria-hidden="true">A</div>
       </article>
 
       <!-- Future projects teaser -->
