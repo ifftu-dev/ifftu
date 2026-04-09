@@ -7,7 +7,7 @@ readTime: "18 MIN"
 draft: false
 ---
 
-The internet solved the distribution of knowledge. It has not solved the recognition of knowledge — and that gap determines who gets opportunity and who doesn't.
+An honest attempt to make knowledge — and its recognition — truly free. For everyone. Forever.
 
 Today I'm open-sourcing Alexandria: a desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials.
 
@@ -15,15 +15,31 @@ Today I'm open-sourcing Alexandria: a desktop and mobile application that turns 
 
 ## Why Build This
 
-I started Alexandria because of a contradiction that kept bothering me: the internet made knowledge essentially free to distribute, but the systems that recognise knowledge — degrees, certifications, resumes — are still expensive, centralised, and gatekept.
+The world is splitting apart. Not along the old lines — though those never really healed — but along new ones that are harder to see and harder to fight. Wealth concentrates. Power consolidates. The people responsible for stewardship — of institutions, of economies, of the systems that shape billions of lives — abuse that responsibility with a regularity that has stopped surprising anyone. There is a vulgarity to it. Not just the accumulation itself, but the scale, the shamelessness, the quiet agreement that this is simply how things are.
 
-A teenager in Lagos can watch the same MIT lectures as a student in Cambridge. But the MIT student walks away with a credential that opens doors worldwide, and the teenager in Lagos does not. The knowledge is identical. The recognition is not.
+And the dominant mode of interaction between nations, between corporations, between people with power and people without it, has shifted from collaboration to domination. Extract more. Hoard more. Control more. The logic of scarcity applied to a world that has more than enough.
 
-This isn't a content problem. Khan Academy, Coursera, YouTube, and countless others have shown that high-quality learning materials can reach anyone. The unsolved problem is the layer beneath: how do you prove what you know in a way that's verifiable, portable, and not controlled by any single institution?
+I keep coming back to one thought: education might be the only way out.
 
-Most attempts to solve this still depend on servers. Someone has to run the infrastructure, someone has to pay for hosting, and someone has to be trusted not to shut it down. That dependency creates a single point of failure and an implicit trust assumption that contradicts the mission.
+Not education as it exists — expensive, gatekept, designed to sort people into hierarchies. But education as it could be: free, universal, verifiable, and owned by the people who earn it. If you could learn anything, prove what you know, and have that proof recognised anywhere in the world — without needing permission from an institution, without paying someone for a stamp on a piece of paper — the walls start to come down. The walls of money, scarcity, status, geography. The walls that keep billions of people locked out of opportunity not because they lack ability, but because they lack access.
 
-Alexandria eliminates servers entirely. Every user runs a full node — a native application that contains the entire platform: database, content store, P2P networking, wallet, and UI. There is no central API, no hosted database, and no cloud infrastructure. If Alexandria the organisation disappeared tomorrow, every learner's credentials would remain verifiable, every piece of content would remain accessible, and every reputation record would remain intact.
+A teenager in Lagos can watch the same MIT lectures as a student in Cambridge. She can do the same problem sets, read the same papers, build the same understanding. But the MIT student walks away with a credential that opens doors worldwide, and she does not. The knowledge is identical. The recognition is not. And it's the recognition — not the knowledge — that determines who gets the job, the visa, the life.
+
+If we actually solve this — if we make human knowledge and its recognition truly portable, truly free — we might set ourselves on a more sustainable path. We might stop wasting the potential of most of our species. And maybe, if we're ambitious enough to think on longer timescales, we might need all of that knowledge to be portable for another reason: we won't be on this little rock forever.
+
+That's where Alexandria comes from.
+
+---
+
+## The Problem, Specifically
+
+The internet solved the distribution of knowledge. Khan Academy, Coursera, YouTube, and countless others have proven that high-quality learning materials can reach anyone. But the internet has not solved the *recognition* of knowledge — and that gap determines who gets opportunity and who doesn't.
+
+How do you prove what you know in a way that's verifiable, portable, and not controlled by any single institution? How do you make recognition as free as knowledge already is?
+
+Most attempts to solve this still depend on servers. Someone has to run the infrastructure, someone has to pay for hosting, and someone has to be trusted not to shut it down. That creates exactly the kind of wall I'm trying to remove — a gatekeeper with an off switch.
+
+Alexandria minimises that dependency to the absolute floor. Every user runs a full node — a native application that contains the entire platform: database, content store, P2P networking, wallet, and UI. There is no central API and no hosted database. Lightweight relay servers help peers find each other and traverse NAT, but they have no authority — they can't read traffic, forge identities, or control access. They're dumb pipes. Anyone can run one, and if all of them disappeared, peers that already know each other continue to function. If Alexandria the organisation disappeared tomorrow, every learner's credentials would remain verifiable, every piece of content would remain accessible, and every reputation record would remain intact.
 
 ---
 
@@ -37,7 +53,7 @@ At its core, Alexandria is a **Tauri v2 application** — a single binary that b
 
 **A reputation system** — instructor impact derived from learner outcomes, scoped to `(subject, role, skill, proficiency_level)`. Exposed as a distribution with confidence bounds — no global scores, no star ratings, no follower counts. Reputation snapshots can be anchored on-chain as CIP-68 soulbound tokens.
 
-**An assessment integrity system** — Sentinel, a client-side anti-cheat that monitors assessment integrity through multi-signal behavioral fingerprinting (keystroke autoencoder, mouse trajectory CNN, face embedber via LBP histograms). All processing happens on-device — raw behavioral data never leaves the client. Only derived scores cross the network.
+**An assessment integrity system** — Sentinel, a client-side anti-cheat that monitors assessment integrity through multi-signal behavioral fingerprinting (keystroke dynamics, mouse movement patterns, camera presence, tab focus, paste detection, devtools detection). All processing happens on-device — raw behavioral data never leaves the client. Only derived scores cross the network.
 
 These layers reinforce each other. Verifiable credentials make the reputation system trustworthy. Sentinel makes the evidence pipeline tamper-resistant. The reputation system makes governance meritocratic. And governance keeps the platform aligned with its users rather than its operators.
 
@@ -102,15 +118,15 @@ This is under active development. I want to be upfront about what's solid and wh
 
 The reputation model — scoping reputation to `(subject, role, skill, proficiency_level)` and exposing it as a distribution rather than a scalar. This is the core design insight and it holds up in the implementation.
 
-The P2P protocol — a fully specified, implementation-complete protocol with 6 gossip topics, a 6-step validation pipeline (signature, identity, freshness, dedup, schema, authority), per-topic peer scoring, and Ed25519 message signing linked to Cardano stake addresses.
+The P2P protocol — a fully specified, implementation-complete protocol with 6 gossip topics, a 5-step validation pipeline (signature + identity binding, freshness, dedup, schema, authority), per-topic peer scoring, and Ed25519 message signing linked to Cardano stake addresses.
 
 The credential ownership model — credentials live in the learner's local SQLite and iroh store. Proofs can be minted on Cardano as NFTs (Conway era, preprod testnet, CIP-25 metadata). No server holds or controls credential data.
 
 The offline-first architecture — every operation works without network access. Sync is opportunistic, not required.
 
-The Sentinel anti-cheat — client-side behavioral fingerprinting with three ML models (keystroke autoencoder, mouse trajectory CNN, face embedder), all trained on-device with zero external dependencies. Raw data never leaves the client.
+The Sentinel anti-cheat — client-side behavioral fingerprinting across six signals (keystroke dynamics, mouse movement, camera presence, tab focus, paste detection, devtools detection). All processing on-device. Raw data never leaves the client.
 
-The test suite — 423 backend tests across crypto, database, P2P, evidence, cardano, and domain modules, plus ~1500 lines of stress tests covering high-volume gossip, concurrent validation, and adversarial inputs.
+The test suite — 441 backend tests across crypto, database, P2P, evidence, cardano, and domain modules, plus ~1500 lines of stress tests covering high-volume gossip, concurrent validation, and adversarial inputs.
 
 The governance smart contracts — all 7 Aiken validators (election, proposal, DAO minting/registry, vote minting, reputation minting, soulbound) are implemented and ready for preprod deployment.
 
@@ -156,13 +172,15 @@ Everything you need — prerequisites, build instructions, onboarding, and docum
 
 ## The Bet
 
-Alexandria is a bet that the infrastructure for recognising human capability should be a public good — free, open, verifiable, and owned by no one. Not just the content layer (that's been solved), but the *recognition* layer: the part that determines how learning is verified, how teaching quality is measured, and how credentials flow between people and institutions.
+The world doesn't have to work this way. The concentration of power, the hoarding of opportunity, the quiet acceptance that most people will never get a fair shot — none of that is inevitable. It's a choice, maintained by systems that benefit from keeping things the way they are.
 
-By putting a full node on every device — desktop and mobile — and eliminating servers entirely, there is genuinely no single point of failure. No company to shut down, no database to seize, no API keys to revoke.
+Alexandria is a bet that one of those systems — the recognition of human capability — can be rebuilt as a public good. Free, open, verifiable, owned by no one. Not just the content (that's been solved), but the credential: the thing that determines who is seen as capable and who remains invisible.
+
+By putting a full node on every device — with relay servers that have no authority and that anyone can run — there is no meaningful single point of failure. No company to shut down, no database to seize, no API keys to revoke.
 
 It might not work. The cold-start problem is real. Getting employers to trust a new credential system is hard. Building a peer-to-peer network that scales is hard. All of this is hard.
 
-But the alternative — continuing to let access to opportunity depend on which institution stamps your paper — is worse. And I'd rather build this in the open, with people who care about it, than not try at all.
+But I keep thinking about that teenager in Lagos. And the millions like her. And the world we're building by wasting that much human potential. The alternative — accepting it, doing nothing, letting access to opportunity depend on accidents of birth — is not something I can live with.
 
 If any of this resonates, come build with me so I don't have to keep saying "I" all the time :)
 
