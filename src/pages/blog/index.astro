@@ -32,7 +32,7 @@ function formatDate(dateStr: string) {
       <div class="blog__list">
         {posts.map((post, i) => (
           <a href={`/blog/${post.id}`} class={`blog-card animate-reveal delay-${i + 2}`}>
-            <div class="blog-card__index text-display">{String(i + 1).padStart(2, '0')}</div>
+            <div class="blog-card__index text-display">{String(posts.length - i).padStart(2, '0')}</div>
 
             <div class="blog-card__content">
               <div class="blog-card__meta">

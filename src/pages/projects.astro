@@ -98,7 +98,9 @@ import Base from '../layouts/Base.astro';
           </div>
         </div>
 
-        <div class="teaser-card__watermark text-display" aria-hidden="true">A</div>
+        <div class="teaser-card__watermark-clip" aria-hidden="true">
+          <div class="teaser-card__watermark text-display">A</div>
+        </div>
       </article>
 
       <!-- Future projects teaser -->
@@ -128,7 +130,6 @@ import Base from '../layouts/Base.astro';
     border: 1px solid var(--border);
     padding: var(--space-lg);
     position: relative;
-    overflow: hidden;
     margin-bottom: var(--space-lg);
     background: rgba(255, 34, 0, 0.01);
   }
@@ -140,6 +141,13 @@ import Base from '../layouts/Base.astro';
     width: 4px;
     height: 100%;
     background: var(--accent);
+  }
+
+  .teaser-card__watermark-clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
   }
 
   .teaser-card__watermark {
