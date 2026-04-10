@@ -58,7 +58,7 @@ import Base from '../layouts/Base.astro';
               <span>STACK: RUST / VUE 3 / LIBP2P / SQLITE</span>
             </div>
 
-            <div class="teaser-card__links" style="margin-top: var(--space-md); display: flex; gap: 1rem;">
+            <div class="teaser-card__links">
               <a href="/blog/introducing-alexandria" class="btn btn--primary">
                 READ THE ANNOUNCEMENT
               </a>
@@ -256,6 +256,12 @@ import Base from '../layouts/Base.astro';
     color: var(--border);
   }
 
+  .teaser-card__links {
+    display: flex;
+    gap: 1rem;
+    margin-top: var(--space-md);
+  }
+
   .teaser-card__cursor {
     color: var(--accent);
     animation: cursor-blink 1s step-end infinite;
@@ -334,6 +340,14 @@ import Base from '../layouts/Base.astro';
 
     .teaser-card__body {
       grid-template-columns: 1fr;
+    }
+
+    .teaser-card__meta {
+      flex-wrap: wrap;
+    }
+
+    .teaser-card__links {
+      flex-wrap: wrap;
     }
   }
 </style>
