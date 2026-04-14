@@ -47,9 +47,9 @@ Alexandria minimises that dependency to the absolute floor. Every user runs a fu
 
 At its core, Alexandria is a **Tauri v2 application** — a single binary that bundles a Rust backend with a Vue 3 frontend. It runs on macOS, Linux, Windows, iOS, and Android. It does four things:
 
-**A learning platform** — rich courses with HTML, video, and interactive quizzes, stored in an iroh content-addressed blob store (BLAKE3 hashes). Published courses resolve from public URLs and propagate across the peer-to-peer network via GossipSub. Fresh installs bootstrap a bundled public catalog before network discovery catches up.
+**A learning platform** — rich courses with HTML, video, and interactive quizzes, plus standalone short-form video *tutorials* and *Field Commentary* (credentialed video takes from practitioners who hold the relevant skill at apply-or-above proficiency). Everything is stored in an iroh content-addressed blob store (BLAKE3 hashes), published under public URLs, and propagated across the peer-to-peer network via GossipSub. Fresh installs bootstrap a bundled public catalog before network discovery catches up. An opt-in *PinBoard* topic lets peers advertise what content they've committed to pin.
 
-**A credential system** — when you demonstrate a skill (through assessments, projects, or peer-attested evidence), you earn a SkillProof: a cryptographic credential scoped to a specific skill at a specific Bloom's taxonomy level, backed by weighted evidence with confidence scores. Proofs can be minted as NFTs on Cardano (Conway era, preprod testnet) with CIP-25 metadata — independently verifiable on-chain without the platform.
+**A credential system** — when you demonstrate a skill (through assessments, projects, or peer-attested evidence), you earn a credential: a W3C-style Verifiable Credential signed under your own DID (`did:key` / Ed25519), scoped to a specific skill at a specific Bloom's taxonomy level, backed by weighted evidence with confidence scores. Six distinct credential types — Formal, Assessment, Attestation, Role, Derived, and Self-Asserted — carry different trust weights. JSON payloads are JCS-canonicalised, signed with JWS detached signatures, tracked via RevocationList2020, and hash-anchored to Cardano in metadata-only transactions (Conway era, preprod testnet). Selective-disclosure presentations let learners share only the level (not the full evidence chain), and self-contained offline bundles let employers verify a credential with no network access at all. The legacy CIP-25/CIP-68 NFT mint path is still supported as an optional rail but is no longer the primary anchor.
 
 **A reputation system** — instructor impact derived from learner outcomes, scoped to `(subject, role, skill, proficiency_level)`. Exposed as a distribution with confidence bounds — no global scores, no star ratings, no follower counts. Reputation snapshots can be anchored on-chain as CIP-68 soulbound tokens.
 
@@ -65,7 +65,7 @@ Everything is open-source under active development:
 
 **[Vision Paper](https://github.com/ifftu-dev/alexandria/blob/main/docs/vision.md)** — A document explaining the motivation, the design, and why this matters for learners, educators, employers, and policymakers. Start here if you want to understand the *why*.
 
-**[Protocol Specification](https://github.com/ifftu-dev/alexandria/blob/main/docs/protocol-specification.md)** — The normative technical spec: P2P wire formats, 6 gossip topics, validation pipeline, peer scoring, evidence model, governance rules, and threat mitigations. Start here if you want to understand the *how* or build a conforming implementation.
+**[Protocol Specification](https://github.com/ifftu-dev/alexandria/blob/main/docs/protocol-specification.md)** — The normative technical spec: P2P wire formats, 11 gossip topics (including `vc-did/1.0`, `vc-status/1.0`, `vc-presentation/1.0`, `pinboard/1.0`, `opinions/1.0` and the `vc-fetch/1.0` request-response protocol), validation pipeline, peer scoring, evidence model, governance rules, and threat mitigations. Start here if you want to understand the *how* or build a conforming implementation.
 
 → [github.com/ifftu-dev/alexandria](https://github.com/ifftu-dev/alexandria)
 → [alexandria.ifftu.dev](https://alexandria.ifftu.dev/)
@@ -78,14 +78,15 @@ Everything is open-source under active development:
 alexandria/
 ├── src-tauri/        # Rust backend (Tauri v2)
 │   └── src/
-│       ├── cardano/  # Blockfrost client, Conway tx building, NFT policies
-│       ├── commands/ # ~200 IPC command handlers (frontend ↔ backend)
-│       ├── crypto/   # BIP-39 wallet, vault (Stronghold / portable), Ed25519
-│       ├── db/       # SQLite (53 tables, 19 migrations, seed data)
-│       ├── domain/   # Business logic (courses, evidence, governance, ...)
-│       ├── evidence/ # Aggregation, attestation, challenges, reputation
-│       ├── ipfs/     # iroh node, IPFS gateway fallback, CID resolution
-│       ├── p2p/      # libp2p swarm — DHT, relay, gossip, peer exchange
+│       ├── cardano/  # Blockfrost client, Conway tx building, metadata anchors
+│       ├── commands/ # ~228 IPC command handlers across 31 modules (frontend ↔ backend)
+│       ├── credentials/ # W3C Verifiable Credentials — issue, sign (JCS+JWS), revoke, present
+│       ├── crypto/   # BIP-39 wallet, vault (Stronghold / portable), Ed25519, did:key
+│       ├── db/       # SQLite (53 tables, 27 migrations, seed data)
+│       ├── domain/   # Business logic (courses, tutorials, opinions, evidence, governance)
+│       ├── evidence/ # Aggregation engine with anti-gaming penalties, attestation, challenges
+│       ├── iroh/     # iroh content-addressed blob store, BLAKE3 hashes
+│       ├── p2p/      # libp2p swarm — DHT, relay, gossip, peer exchange, vc-fetch
 │       ├── classroom/ # Encrypted group messaging, member management
 │       └── tutoring/  # Live tutoring sessions over QUIC (iroh-live)
 ├── src/              # Vue 3 + TypeScript frontend
@@ -116,25 +117,25 @@ This is under active development. I want to be upfront about what's solid and wh
 
 **What I think is solid:**
 
-The reputation model — scoping reputation to `(subject, role, skill, proficiency_level)` and exposing it as a distribution rather than a scalar. This is the core design insight and it holds up in the implementation.
+The reputation model — scoping reputation to `(subject, role, skill, proficiency_level)` and exposing it as a distribution rather than a scalar. Aggregation runs through a deterministic engine with anti-gaming penalties for collusion patterns. This is the core design insight and it holds up in the implementation.
 
-The P2P protocol — a fully specified, implementation-complete protocol with 6 gossip topics, a 5-step validation pipeline (signature + identity binding, freshness, dedup, schema, authority), per-topic peer scoring, and Ed25519 message signing linked to Cardano stake addresses.
+The P2P protocol — a fully specified, implementation-complete protocol with 11 gossip topics plus the `vc-fetch/1.0` request-response, a 5-step validation pipeline (signature + identity binding, freshness, dedup, schema, authority), per-topic peer scoring, and Ed25519 message signing linked to Cardano stake addresses.
 
-The credential ownership model — credentials live in the learner's local SQLite and iroh store. Proofs can be minted on Cardano as NFTs (Conway era, preprod testnet, CIP-25 metadata). No server holds or controls credential data.
+The Verifiable Credentials pipeline — W3C VCs signed under `did:key` / Ed25519, JCS-canonicalised and JWS-detached, tracked via RevocationList2020, hash-anchored through a durable anchor queue to Cardano (metadata-only, not an NFT mint). Six credential types carry distinct trust weights. Selective-disclosure presentations and offline-survivable bundles (`verify_bundle_offline`) let learners share and employers verify without any platform involvement. No server holds or controls credential data.
 
 The offline-first architecture — every operation works without network access. Sync is opportunistic, not required.
 
 The Sentinel anti-cheat — client-side behavioral fingerprinting across six signals (keystroke dynamics, mouse movement, camera presence, tab focus, paste detection, devtools detection). All processing on-device. Raw data never leaves the client.
 
-The test suite — 441 backend tests across crypto, database, P2P, evidence, cardano, and domain modules, plus ~1500 lines of stress tests covering high-volume gossip, concurrent validation, and adversarial inputs.
+The test suite — 440+ Rust tests across crypto, database, P2P, evidence, cardano, credentials, and domain modules, plus stress tests covering high-volume gossip, concurrent validation, and adversarial inputs. A first wave of frontend tests (Vitest) has also landed.
 
 The governance smart contracts — all 7 Aiken validators (election, proposal, DAO minting/registry, vote minting, reputation minting, soulbound) are implemented and ready for preprod deployment.
 
 **What needs significant improvement:**
 
-There are no frontend tests. The backend has 423 tests, but the Vue frontend has zero test coverage.
+Frontend test coverage is still thin. The first Vitest suite landed recently, but most Vue components and composables don't have tests yet.
 
-Content moderation doesn't exist. Any peer can publish any course to the catalog topic. The peer scoring system penalizes invalid messages, but there's no mechanism for reporting or removing objectionable content.
+Content moderation doesn't exist. Any peer can publish any course, tutorial, or opinion to the relevant topic. The peer scoring system penalizes invalid messages, but there's no mechanism for reporting or removing objectionable content.
 
 The sustainability model needs more depth. The non-profit structure and revenue sources (recruitment services, institutional LMS) are described but there's no financial modelling or competitive analysis.
 
@@ -187,3 +188,7 @@ If any of this resonates, come build with me so I don't have to keep saying "I" 
 Pratyush Pundir
 
 → [pratyush@ifftu.dev](mailto:pratyush@ifftu.dev)
+
+---
+
+_Updated 2026-04-12 — updated to reflect the W3C Verifiable Credentials layer (replacing the NFT-first model described in the April 8 post), the Field Commentary / tutorials content shapes, the PinBoard topic, and the expanded gossip topic set._
