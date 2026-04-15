@@ -78,19 +78,19 @@ Everything is open-source under active development:
 alexandria/
 ├── src-tauri/        # Rust backend (Tauri v2)
 │   └── src/
+│       ├── aggregation/ # Deterministic aggregation engine with anti-gaming penalties
 │       ├── cardano/  # Blockfrost client, Conway tx building, metadata anchors
+│       ├── classroom/ # Encrypted group messaging, member management
 │       ├── commands/ # 227 IPC command handlers across 31 modules (frontend ↔ backend)
-│       ├── credentials/ # W3C Verifiable Credentials — issue, sign (JCS+JWS), revoke, present
 │       ├── crypto/   # BIP-39 wallet, vault (Stronghold / portable), Ed25519, did:key
 │       ├── db/       # SQLite (66 tables, 30 migrations, seed data)
-│       ├── domain/   # Business logic (courses, tutorials, opinions, evidence, governance)
-│       ├── evidence/ # Aggregation engine with anti-gaming penalties, attestation, challenges
-│       ├── iroh/     # iroh content-addressed blob store, BLAKE3 hashes
+│       ├── domain/   # Business logic — courses, tutorials, opinions, vc (W3C VCs + JCS/JWS), evidence, governance
+│       ├── evidence/ # Attestation, challenges, reputation inputs
+│       ├── ipfs/     # iroh node, BLAKE3 content-addressed blobs, CID resolution
 │       ├── p2p/      # libp2p swarm — DHT, relay, gossip, peer exchange, vc-fetch
-│       ├── classroom/ # Encrypted group messaging, member management
-│       └── tutoring/  # Live tutoring sessions over QUIC (iroh-live)
+│       └── tutoring/ # Live audio/video tutoring (desktop + mobile managers)
 ├── src/              # Vue 3 + TypeScript frontend
-│   ├── pages/        # 25 pages
+│   ├── pages/        # 30 route views
 │   ├── components/   # UI components
 │   └── composables/  # State management and platform APIs
 ├── cli/              # Developer CLI (alex) — Rust + clap
