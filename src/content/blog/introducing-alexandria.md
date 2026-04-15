@@ -79,10 +79,10 @@ alexandria/
 ├── src-tauri/        # Rust backend (Tauri v2)
 │   └── src/
 │       ├── cardano/  # Blockfrost client, Conway tx building, metadata anchors
-│       ├── commands/ # ~228 IPC command handlers across 31 modules (frontend ↔ backend)
+│       ├── commands/ # 227 IPC command handlers across 31 modules (frontend ↔ backend)
 │       ├── credentials/ # W3C Verifiable Credentials — issue, sign (JCS+JWS), revoke, present
 │       ├── crypto/   # BIP-39 wallet, vault (Stronghold / portable), Ed25519, did:key
-│       ├── db/       # SQLite (53 tables, 27 migrations, seed data)
+│       ├── db/       # SQLite (66 tables, 30 migrations, seed data)
 │       ├── domain/   # Business logic (courses, tutorials, opinions, evidence, governance)
 │       ├── evidence/ # Aggregation engine with anti-gaming penalties, attestation, challenges
 │       ├── iroh/     # iroh content-addressed blob store, BLAKE3 hashes
