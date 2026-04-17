@@ -3,6 +3,13 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base title="404 — IFFTU">
+  <script>
+    function fire404() {
+      (window as any).plausible?.('404', { props: { path: location.pathname } });
+    }
+    fire404();
+    document.addEventListener('astro:page-load', fire404);
+  </script>
   <section class="lost">
     <div class="lost__scan-line"></div>
     <div class="lost__inner container">

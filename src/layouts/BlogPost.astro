@@ -44,8 +44,28 @@ function formatDate(dateStr: string) {
 
       <div class="post__body animate-reveal delay-4">
         <slot />
-        <div class="post__end">///</div>
+        <div class="post__end" data-post-end>///</div>
       </div>
     </div>
   </article>
+
+  <script>
+    function watchPostEnd() {
+      const end = document.querySelector('[data-post-end]');
+      if (!end) return;
+      let fired = false;
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && !fired) {
+            fired = true;
+            (window as any).plausible?.('Blog-Post-Read', { props: { path: location.pathname } });
+            observer.disconnect();
+          }
+        }
+      }, { threshold: 0.5 });
+      observer.observe(end);
+    }
+    watchPostEnd();
+    document.addEventListener('astro:page-load', watchPostEnd);
+  </script>
 </Base>

@@ -23,7 +23,7 @@ const links = [
           <a
             href={link.href}
             data-astro-prefetch="load"
-            class:list={['nav__link', { 'nav__link--active': currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }]}
+            class:list={['nav__link', { 'nav__link--active': currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }, `plausible-event-name=Nav-${link.label}`]}
           >
             <span class="nav__link-index">{String(i).padStart(2, '0')}</span>
             {link.label}
@@ -50,7 +50,7 @@ const links = [
           <a
             href={link.href}
             data-astro-prefetch="load"
-            class:list={['mobile-menu__link', { 'mobile-menu__link--active': currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }]}
+            class:list={['mobile-menu__link', { 'mobile-menu__link--active': currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }, `plausible-event-name=Nav-${link.label}`]}
           >
             <span class="mobile-menu__link-index text-display">{String(i).padStart(2, '0')}</span>
             <span class="mobile-menu__link-label text-display">{link.label}</span>

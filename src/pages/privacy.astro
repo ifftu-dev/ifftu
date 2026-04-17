@@ -1,0 +1,136 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Privacy — IFFTU" description="How IFFTU handles data on ifftu.dev. Short version: we don't collect anything that identifies you." canonicalPath="/privacy">
+  <section class="page-header" data-watermark="P">
+    <div class="page-header__inner container">
+      <div class="page-header__pre text-mono animate-reveal delay-1">
+        <span style="color: var(--accent);">//</span> DATA POLICY
+      </div>
+      <h1 class="page-header__title text-display animate-reveal delay-2">
+        PRIVACY
+      </h1>
+      <p class="page-header__desc animate-reveal delay-3">
+        Short version: we don't track you.<br class="hide-mobile" />
+        Long version: read on.
+      </p>
+    </div>
+  </section>
+
+  <section class="privacy">
+    <div class="privacy__inner container">
+      <div class="privacy__block animate-reveal delay-3">
+        <h2 class="privacy__heading text-display">01 / WHAT WE COLLECT</h2>
+        <p>
+          This site uses <a href="https://plausible.io/privacy-focused-web-analytics" target="_blank" rel="noopener">Plausible Analytics</a>,
+          a privacy-friendly, cookieless tool. We collect aggregate pageview counts, referrer URLs,
+          country (from your IP, then discarded), browser name, and OS name.
+        </p>
+      </div>
+
+      <div class="privacy__block animate-reveal delay-4">
+        <h2 class="privacy__heading text-display">02 / WHAT WE DON'T COLLECT</h2>
+        <ul class="privacy__list">
+          <li>No cookies.</li>
+          <li>No personal identifiers.</li>
+          <li>No cross-site tracking.</li>
+          <li>No fingerprinting.</li>
+          <li>No data sold or shared with third parties.</li>
+          <li>No profile of you, anywhere.</li>
+        </ul>
+      </div>
+
+      <div class="privacy__block animate-reveal delay-4">
+        <h2 class="privacy__heading text-display">03 / WHY WE COLLECT ANYTHING</h2>
+        <p>
+          We want to know which posts get read and which pages people land on,
+          so we can spend our time writing about what's useful. That's all.
+        </p>
+      </div>
+
+      <div class="privacy__block animate-reveal delay-4">
+        <h2 class="privacy__heading text-display">04 / THIRD PARTIES</h2>
+        <p>
+          Plausible hosts analytics for us in the EU. Their
+          <a href="https://plausible.io/data-policy" target="_blank" rel="noopener">data policy</a>
+          explains exactly what they do and don't store. We don't use Google Analytics,
+          Facebook Pixel, or any other profile-building tool.
+        </p>
+      </div>
+
+      <div class="privacy__block animate-reveal delay-4">
+        <h2 class="privacy__heading text-display">05 / CONTACT</h2>
+        <p>
+          Questions or requests about data? Email
+          <a href="mailto:admin@ifftu.dev" class="plausible-event-name=Contact-Click">admin@ifftu.dev</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .privacy {
+    padding: var(--space-xl) 0;
+  }
+
+  .privacy__inner {
+    max-width: 760px;
+  }
+
+  .privacy__block {
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .privacy__block:last-child {
+    border-bottom: none;
+  }
+
+  .privacy__heading {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .privacy p,
+  .privacy__list {
+    color: var(--gray-light);
+    line-height: 1.8;
+  }
+
+  .privacy__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .privacy__list li {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .privacy__list li::before {
+    content: '//';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+
+  .privacy a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .privacy a:hover {
+    border-bottom-color: var(--accent);
+  }
+</style>

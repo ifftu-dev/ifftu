@@ -41,10 +41,13 @@ src/
     Footer.astro           # Site footer
   layouts/
     Base.astro             # Root layout (head, nav, footer, scroll observer)
+    BlogPost.astro         # Blog post layout with end-of-read tracking
   pages/
     index.astro            # Homepage
     projects.astro         # Projects listing
     contact.astro          # Contact information
+    privacy.astro          # Privacy policy
+    404.astro              # Not-found page
     blog/
       index.astro          # Blog index
       why-we-fight.astro   # Blog post
@@ -55,6 +58,20 @@ src/
 public/
   favicon.svg
 ```
+
+## Analytics
+
+The site uses [Plausible Analytics](https://plausible.io) — privacy-first, cookieless, GDPR-compliant by default. The script is loaded from `src/layouts/Base.astro` and tracks:
+
+- Pageviews, referrers, outbound link clicks, file downloads (automatic)
+- Custom goals via the `plausible-event-name=<Goal>` class convention:
+  - `Nav-INDEX` / `Nav-PROJECTS` / `Nav-BLOG` / `Nav-CONTACT` — nav clicks
+  - `CTA-GitHub` — main GitHub outbound links
+  - `Contact-Click` — `mailto:` clicks
+  - `Blog-Post-Read` — fired when a reader reaches the end of a post
+  - `404` — fired on the 404 page
+
+No cookies, no cross-site tracking, no personal identifiers. See `/privacy` on the live site for the user-facing policy.
 
 ## Design
 
