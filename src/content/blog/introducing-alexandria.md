@@ -9,7 +9,7 @@ draft: false
 
 An honest attempt to make knowledge — and its recognition — truly free. For everyone. Forever.
 
-Today I'm open-sourcing Alexandria: a desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials.
+Today I'm publicly announcing and open-sourcing Alexandria: a desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials.
 
 ---
 
@@ -45,9 +45,9 @@ Alexandria minimises that dependency to the absolute floor. Every user runs a fu
 
 ## What Alexandria Actually Is
 
-At its core, Alexandria is a **Tauri v2 application** — a single binary that bundles a Rust backend with a Vue 3 frontend. It runs on macOS, Linux, Windows, iOS, and Android. It does four things:
+At its core, Alexandria is a **[Tauri](https://v2.tauri.app/) v2 application** — a single binary that bundles a Rust backend with a Vue 3 frontend. It runs on macOS, Linux, Windows, iOS, and Android. It does four things:
 
-**A learning platform** — rich courses with HTML, video, and interactive quizzes, plus standalone short-form video *tutorials* and *Field Commentary* (credentialed video takes from practitioners who hold the relevant skill at apply-or-above proficiency). Everything is stored in an iroh content-addressed blob store (BLAKE3 hashes), published under public URLs, and propagated across the peer-to-peer network via GossipSub. Fresh installs bootstrap a bundled public catalog before network discovery catches up. An opt-in *PinBoard* topic lets peers advertise what content they've committed to pin.
+**A learning platform** — rich courses with HTML, video, and interactive quizzes, plus standalone short-form video *tutorials* and *Field Commentary* (credentialed video takes from practitioners who hold the relevant skill at apply-or-above proficiency). Everything is stored in an [iroh](https://www.iroh.computer/) content-addressed blob store (BLAKE3 hashes), published under public URLs, and propagated across the peer-to-peer network via GossipSub. Fresh installs bootstrap a bundled public catalog before network discovery catches up. An opt-in *PinBoard* topic lets peers advertise what content they've committed to pin.
 
 **A credential system** — when you demonstrate a skill (through assessments, projects, or peer-attested evidence), you earn a credential: a W3C-style Verifiable Credential signed under your own DID (`did:key` / Ed25519), scoped to a specific skill at a specific Bloom's taxonomy level, backed by weighted evidence with confidence scores. Six distinct credential types — Formal, Assessment, Attestation, Role, Derived, and Self-Asserted — carry different trust weights. JSON payloads are JCS-canonicalised, signed with JWS detached signatures, tracked via RevocationList2020, and hash-anchored to Cardano in metadata-only transactions (Conway era, preprod testnet). Selective-disclosure presentations let learners share only the level (not the full evidence chain), and self-contained offline bundles let employers verify a credential with no network access at all. The legacy CIP-25/CIP-68 NFT mint path is still supported as an optional rail but is no longer the primary anchor.
 
@@ -67,8 +67,8 @@ Everything is open-source under active development:
 
 **[Protocol Specification](https://github.com/ifftu-dev/alexandria/blob/main/docs/protocol-specification.md)** — The normative technical spec: P2P wire formats, 11 gossip topics (including `vc-did/1.0`, `vc-status/1.0`, `vc-presentation/1.0`, `pinboard/1.0`, `opinions/1.0` and the `vc-fetch/1.0` request-response protocol), validation pipeline, peer scoring, evidence model, governance rules, and threat mitigations. Start here if you want to understand the *how* or build a conforming implementation.
 
-→ [github.com/ifftu-dev/alexandria](https://github.com/ifftu-dev/alexandria)
-→ [alexandria.ifftu.dev](https://alexandria.ifftu.dev/)
+→ [Github](https://github.com/ifftu-dev/alexandria)
+→ [Project Website](https://alexandria.ifftu.dev/)
 
 ---
 
