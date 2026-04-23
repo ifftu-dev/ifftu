@@ -512,8 +512,10 @@ img {
   padding-left: var(--space-sm);
   margin-bottom: 1.5rem;
   font-family: var(--font-serif);
+  font-size: 1.3em;
   font-style: italic;
-  color: var(--gray-light);
+  letter-spacing: 0.03em;
+  color: var(--white);
 }
 
 @media (max-width: 768px) {
