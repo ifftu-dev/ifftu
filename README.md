@@ -10,7 +10,7 @@ Website for IFFTU, an open source collective using cutting-edge technology to so
 
 ## Stack
 
-- [Astro](https://astro.build) 5 — static site generator
+- [Astro](https://astro.build) 6 — static site generator
 - TypeScript (strict)
 - Hand-written CSS (no frameworks)
 - Zero client-side JS frameworks
@@ -37,26 +37,33 @@ The dev server starts at `http://localhost:4321`.
 ```
 src/
   components/
-    Nav.astro              # Fixed navigation bar
-    Footer.astro           # Site footer
+    Nav.astro                # Fixed navigation bar
+    Footer.astro             # Site footer
   layouts/
-    Base.astro             # Root layout (head, nav, footer, scroll observer)
-    BlogPost.astro         # Blog post layout with end-of-read tracking
+    Base.astro               # Root layout (head, nav, footer, scroll observer)
+    BlogPost.astro           # Blog post layout with end-of-read tracking
   pages/
-    index.astro            # Homepage
-    projects.astro         # Projects listing
-    contact.astro          # Contact information
-    privacy.astro          # Privacy policy
-    404.astro              # Not-found page
+    index.astro              # Homepage
+    projects.astro           # Projects listing
+    contact.astro            # Contact information
+    privacy.astro            # Privacy policy
+    404.astro                # Not-found page
+    rss.xml.ts               # RSS feed endpoint
     blog/
-      index.astro          # Blog index
-      why-we-fight.astro   # Blog post
-      introducing-alexandria.astro
-      transparency-report-001.astro
+      index.astro            # Blog index
+      [...slug].astro        # Dynamic post route (renders from the content collection)
+  content/
+    blog/                    # Markdown posts (Astro content collection)
+      why-we-fight.md
+      introducing-alexandria.md
+  content.config.ts          # Content collection schema + glob loader
   styles/
-    global.css             # Design tokens, reset, animations, utilities
+    global.css               # Design tokens, reset, animations, utilities
 public/
-  favicon.svg
+  favicon.svg (+ .ico, .png variants)
+  og-image.jpg
+  robots.txt
+  site.webmanifest
 ```
 
 ## Analytics
