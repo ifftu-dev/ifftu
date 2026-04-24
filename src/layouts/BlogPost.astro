@@ -7,13 +7,18 @@ interface Props {
   readTime: string;
   tags: string[];
   excerpt: string;
+  author: string;
 }
 
-const { title, date, readTime, tags, excerpt } = Astro.props;
+const { title, date, readTime, tags, excerpt, author } = Astro.props;
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).toUpperCase();
+}
+
+function authorSlug(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 ---
 
@@ -39,6 +44,9 @@ function formatDate(dateStr: string) {
           <span class="post__sep">/</span>
           <span class="text-mono" style="color: var(--accent);">{tags[0]}</span>
         </div>
+        <a href={`/blog/author/${authorSlug(author)}`} class="post__author text-mono animate-reveal delay-2">
+          BY <span class="post__author-name">{author.toUpperCase()}</span>
+        </a>
         <h1 class="post__title text-display animate-reveal delay-3">{title}</h1>
       </header>
 

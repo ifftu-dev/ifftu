@@ -4,6 +4,7 @@ date: "2025-02-15"
 excerpt: "The internet promised liberation. It delivered surveillance capitalism. Here's why we started IFFTU and what we intend to do about it."
 tags: ["MANIFESTO", "OPEN SOURCE"]
 readTime: "8 MIN"
+author: "Pratyush Pundir"
 draft: false
 ---
 

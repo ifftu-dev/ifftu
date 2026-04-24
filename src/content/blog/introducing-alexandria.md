@@ -4,6 +4,7 @@ date: "2026-04-08"
 excerpt: "A desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials. Open-sourced today."
 tags: ["ANNOUNCEMENT", "ALEXANDRIA", "DECENTRALIZED", "OPEN SOURCE"]
 readTime: "10 MIN"
+author: "Pratyush Pundir"
 draft: false
 ---
 
@@ -62,17 +63,21 @@ Alexandria's bet is that in addition to hosting a vast public library, this last
 
 ## What Alexandria Actually Is
 
-Alexandria is like any other app that runs on your Mac, Windows PC, Linux machine, iPhone, or Android phone. The difference is that installing it turns your device into a full participant in the network — not a client connecting to a server, but the whole system, bundled and running locally. It does four things.
+Alexandria is like any other app that runs on your Mac, Windows PC, Linux machine, iPhone, or Android phone. The difference is that installing it turns your device into a full participant in the network — not a client connecting to a server, but the whole system, bundled and running locally. It does six things.
 
-**A learning platform.** Courses, short-form video tutorials, and *Field Commentary* — credentialed takes from practitioners who already hold the skill they're commenting on. Lessons are stored and shared peer-to-peer between users' devices (think of it as BitTorrent for coursework). Every new install ships with a starter catalogue, so there's something to learn on day one.
+**A learning platform.** Courses, short-form video tutorials, and *Opinions* — credentialed takes from practitioners who already hold the skill they're commenting on. Lessons are stored and shared peer-to-peer between users' devices (think of it as BitTorrent for coursework). Every new install ships with a starter catalogue, so there's something to learn on day one.
+
+**A living map of what there is to learn.** Every lesson, credential, and opinion is anchored to a public *skill graph* — a three-tier taxonomy (broad fields like *Computer Science* → subjects like *Distributed Systems* → individual skills) with explicit prerequisite edges (*calculus requires algebra*) and a mastery level attached to each skill, drawn from Bloom's taxonomy: can you *remember* it, *apply* it, *create* with it? This is what lets a credential earned in one part of the world mean something precise to someone on the other side of it. The graph isn't curated by a central team — proposed changes (adding a skill, reshaping prerequisites, deprecating something outdated) are ratified by a domain committee, versioned, signed, and gossiped to every node so every participant agrees on what a given skill *means*.
 
 **Credentials you actually own.** When you demonstrate a skill — through an assessment, a project, or a peer's attestation — you earn a tamper-proof credential that you sign yourself, with a key only you control. No platform holds it. Different kinds of evidence (a formal exam, a completed project, a peer's word) carry different weights — the way a court weighs a lab result differently from witness testimony. Every credential is anchored to a public ledger, so anyone in the world can check it hasn't been tampered with, and they can do that verification offline, with nothing but the file you hand them, even if Alexandria itself disappears.
 
-**Reputation without the star rating.** Educators are scored per skill and per level of mastery, as a distribution with confidence bounds — not a single global number. No follower counts, no five-star averages, no popularity contests. An instructor who's excellent at teaching beginner calculus might be middling at advanced, and the system shows that instead of flattening it into one score.
+**Reputation without the star rating.** Educators are scored per skill and per level of mastery, based on their *impact on learners* — did students actually progress, build evidence, and earn credentials after going through their material? That signal is expressed as a distribution with confidence bounds — not a single global number. No follower counts, no five-star averages, no popularity contests. An instructor who's excellent at teaching beginner calculus might be middling at advanced, and the system shows that instead of flattening it into one score.
 
 **Honest assessments.** A local integrity layer called Sentinel watches for cheating during assessments, the way your browser watches for suspicious logins. All the analysis happens on your device; only a final integrity score ever leaves it. Your keystrokes, camera feed, and behaviour never touch a server.
 
-These four layers reinforce each other. Credentials you own make the reputation system trustworthy. On-device integrity makes the evidence pipeline tamper-resistant. Trustworthy reputation makes governance meritocratic. And governance keeps the platform aligned with its users rather than its operators.
+**Governance that follows expertise, not money.** Every branch of the skill graph has a corresponding DAO, and voting power in that DAO comes from *demonstrated proficiency in the skills it governs* — not stake, not seniority, not how long you've been around. If you've proven you can analyse a topic, you're qualified to vote on decisions about how it's taught and assessed in that domain. Proposals move through draft, committee review, and public vote, with supermajority thresholds and minimum proficiency bars set per proposal. Elections run on fixed cadences — annual for sub-DAOs, every four years for the top-level ones. Today these rules are enforced by the app; the target is a set of Cardano smart contracts so that no one — including me — can override them. The point is simple: the people who understand a subject are the people who decide how it's governed.
+
+These six layers reinforce each other. The skill graph gives every credential a shared, precise vocabulary. Credentials you own make the reputation system trustworthy. On-device integrity makes the evidence pipeline tamper-resistant. Trustworthy reputation makes governance meritocratic. And governance keeps the skill graph — and the platform — aligned with its users rather than its operators.
 
 For the full technical picture — wire formats, cryptographic scheme, validation rules, governance contracts — see the [Protocol Specification](https://github.com/ifftu-dev/alexandria/blob/main/docs/protocol-specification.md).
 

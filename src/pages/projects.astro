@@ -67,10 +67,10 @@ import Base from '../layouts/Base.astro';
               <a href="https://github.com/ifftu-dev/alexandria" class="btn btn--ghost" target="_blank" rel="noopener">
                 GITHUB
               </a>
-              <a href="https://alexandria.ifftu.dev/" class="btn btn--ghost" target="_blank" rel="noopener">
-                WEBSITE
-              </a>
             </div>
+            <a href="https://alexandria.ifftu.dev/" class="btn btn--ghost teaser-card__website-link" target="_blank" rel="noopener">
+              WEBSITE
+            </a>
           </div>
 
           <div class="teaser-card__objectives-col">
@@ -78,23 +78,31 @@ import Base from '../layouts/Base.astro';
             <ul class="teaser-card__objectives">
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">01</span>
-                Decentralized learning platform — courses, short-form tutorials, and Field Commentary, content-addressed via iroh (BLAKE3) and propagated over GossipSub
+                Decentralized learning platform — courses, tutorials, and Opinions, content-addressed via iroh
               </li>
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">02</span>
-                Verifiable Credentials — W3C VCs signed under the learner's DID (Ed25519, JCS+JWS), hash-anchored to Cardano, with selective disclosure and offline verification
+                Skill graph — three-tier taxonomy with Bloom's levels, ratified by domain DAOs
               </li>
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">03</span>
-                Reputation system — instructor impact via a deterministic aggregation engine with anti-gaming penalties; distributions with confidence bounds, no star ratings
+                Verifiable Credentials — W3C VCs under learner DIDs, hash-anchored to Cardano, offline-verifiable
               </li>
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">04</span>
-                Assessment integrity — Sentinel anti-cheat with on-device ML, raw data never leaves the client
+                Reputation — instructor impact on learner outcomes, as per-skill distributions with confidence bounds; no star ratings
               </li>
               <li class="teaser-card__objective">
                 <span class="teaser-card__objective-index">05</span>
-                Offline-first — every operation works without network access, sync is opportunistic
+                Assessment integrity — Sentinel anti-cheat on-device; raw data never leaves the client
+              </li>
+              <li class="teaser-card__objective">
+                <span class="teaser-card__objective-index">06</span>
+                Offline-first — every operation works without the network; sync is opportunistic
+              </li>
+              <li class="teaser-card__objective">
+                <span class="teaser-card__objective-index">07</span>
+                Governance — DAOs mirror the taxonomy; voting gated by proficiency, not stake
               </li>
             </ul>
           </div>
@@ -262,6 +270,13 @@ import Base from '../layouts/Base.astro';
     display: flex;
     gap: 1rem;
     margin-top: var(--space-md);
+  }
+
+  .teaser-card__website-link {
+    display: block;
+    margin-top: 0.75rem;
+    text-align: center;
+    width: 100%;
   }
 
   .teaser-card__cursor {
