@@ -52,11 +52,13 @@ src/
     blog/
       index.astro            # Blog index
       [...slug].astro        # Dynamic post route (renders from the content collection)
+      author/
+        [slug].astro         # Per-author archive — lists every post by that author
   content/
     blog/                    # Markdown posts (Astro content collection)
       why-we-fight.md
       introducing-alexandria.md
-  content.config.ts          # Content collection schema + glob loader
+  content.config.ts          # Content collection schema + glob loader (posts require author, title, date, excerpt, tags, readTime)
   styles/
     global.css               # Design tokens, reset, animations, utilities
 public/
@@ -88,7 +90,7 @@ The site uses a **brutalist raw** aesthetic:
 - **Text**: Bone white `#f0ece4`
 - **Accent**: Electric red `#ff2200`
 - **Display font**: Bebas Neue
-- **Body serif**: Instrument Serif (italic)
+- **Body serif**: Fraunces Variable (wght axis 100–900, upright + italic)
 - **Mono/UI font**: JetBrains Mono
 
 Animations are scroll-triggered via IntersectionObserver. A film grain overlay adds texture across all pages.
