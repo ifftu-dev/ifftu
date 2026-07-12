@@ -17,10 +17,18 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# HTML pages — always revalidate
+# HTML pages. max-age=0 keeps content fresh, but stale-while-revalidate lets
+# the browser serve the already-prefetched copy INSTANTLY on navigation while
+# it revalidates in the background — otherwise must-revalidate forces a blocking
+# round-trip on every click (the perceived pre-navigation pause). Durable edge
+# cache is auto-purged by Netlify on each deploy, so no post-deploy staleness at
+# the edge; a returning browser may see the prior page for at most one view.
+# (More-specific /_astro/* and /fonts/* rules above keep their immutable cache.)
 [[headers]]
   for = "/*"
   [headers.values]
+    Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
+    Netlify-CDN-Cache-Control = "public, max-age=31536000, durable"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
