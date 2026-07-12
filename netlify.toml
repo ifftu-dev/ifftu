@@ -17,17 +17,19 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# HTML pages. max-age=0 keeps content fresh, but stale-while-revalidate lets
-# the browser serve the already-prefetched copy INSTANTLY on navigation while
-# it revalidates in the background — otherwise must-revalidate forces a blocking
-# round-trip on every click (the perceived pre-navigation pause). Durable edge
-# cache is auto-purged by Netlify on each deploy, so no post-deploy staleness at
-# the edge; a returning browser may see the prior page for at most one view.
+# HTML pages. A small non-zero max-age is what actually kills the
+# pre-navigation pause: with max-age=0 the browser (and Astro's router fetch)
+# revalidates the prefetched page on every click — a blocking ~0.5-1s round-trip.
+# Firefox/Safari don't honor stale-while-revalidate, so max-age=0 hurt them
+# regardless. max-age=300 lets the prefetched copy be served straight from cache
+# with no network, so navigation is instant; swr covers the grace window for
+# browsers that support it. Netlify's durable edge cache is auto-purged on every
+# deploy, and the 5-min browser window bounds any post-deploy staleness.
 # (More-specific /_astro/* and /fonts/* rules above keep their immutable cache.)
 [[headers]]
   for = "/*"
   [headers.values]
-    Cache-Control = "public, max-age=0, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=300, stale-while-revalidate=86400"
     Netlify-CDN-Cache-Control = "public, max-age=31536000, durable"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
