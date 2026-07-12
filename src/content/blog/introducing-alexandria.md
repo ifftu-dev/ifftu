@@ -10,7 +10,7 @@ draft: false
 
 An honest attempt to make knowledge — and its recognition — truly free. For everyone. Forever.
 
-I'm publicly announcing and open-sourcing Alexandria: a desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials.
+I'm publicly announcing and open-sourcing [Alexandria](https://github.com/ifftu-dev/alexandria): a desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials.
 
 ---
 
