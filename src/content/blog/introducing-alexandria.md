@@ -1,7 +1,7 @@
 ---
 title: "INTRODUCING ALEXANDRIA"
 date: "2026-04-08"
-excerpt: "A desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials. Open-sourced today."
+excerpt: "A desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials. Free and open source."
 tags: ["ANNOUNCEMENT", "ALEXANDRIA", "DECENTRALIZED", "OPEN SOURCE"]
 readTime: "10 MIN"
 author: "Pratyush Pundir"
@@ -10,7 +10,7 @@ draft: false
 
 An honest attempt to make knowledge — and its recognition — truly free. For everyone. Forever.
 
-Today I'm publicly announcing and open-sourcing Alexandria: a desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials.
+I'm publicly announcing and open-sourcing Alexandria: a desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials.
 
 ---
 
@@ -83,7 +83,7 @@ For the full technical picture — wire formats, cryptographic scheme, validatio
 
 ---
 
-## What I'm Releasing Today
+## What I'm Releasing
 
 **[The codebase](https://github.com/ifftu-dev/alexandria)** — Pretty self-explanatory. Everything, _except enterprise features_, is open-sourced under the expat MIT license.
 
@@ -91,7 +91,7 @@ For the full technical picture — wire formats, cryptographic scheme, validatio
 
 **[Protocol Specification](https://github.com/ifftu-dev/alexandria/blob/main/docs/protocol-specification.md)** — The normative technical spec: wire formats, validation pipeline, peer scoring, credential model, governance rules, and threat mitigations. Start here if you want to understand the *how* or build a conforming implementation.
 
-**[Project Website](https://alexandria.ifftu.dev/)** — The official website for Alexandria. The app, when it comes out of alpha, will be available for download here.
+**[Project Website](https://alexandria.ifftu.dev/)** — The official website for Alexandria, where you can download the current alpha and follow releases.
 
 
 ---
