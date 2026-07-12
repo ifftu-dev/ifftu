@@ -3,6 +3,10 @@ import { ClientRouter } from 'astro:transitions';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+// Above-the-fold faces — preload so text paints without waiting on the
+// CSS @import chain. Bebas = hero display title, JetBrains Mono = body copy.
+import bebasWoff2 from '@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2?url';
+import monoWoff2 from '@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?url';
 
 interface Props {
   title: string;
@@ -28,6 +32,8 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" href={bebasWoff2} as="font" type="font/woff2" crossorigin="anonymous" />
+  <link rel="preload" href={monoWoff2} as="font" type="font/woff2" crossorigin="anonymous" />
   <meta name="description" content={description} />
   <title>{title}</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
