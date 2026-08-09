@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ifftu.dev/sitemap-index.xml
+Sitemap: https://www.ifftu.dev/sitemap-index.xml
