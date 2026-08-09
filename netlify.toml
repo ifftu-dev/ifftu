@@ -2,6 +2,24 @@
   command = "npm run build"
   publish = "dist"
 
+# The Alexandria announcement moved to the Alexandria site. Anything already
+# linking to the old URL — search results, other sites, previously shared links
+# — would otherwise hit a 404, so send it on rather than dropping it. 301 so
+# search engines transfer the ranking to the new home.
+[[redirects]]
+  from = "/blog/introducing-alexandria/"
+  to = "https://alexandria.ifftu.dev/blog/introducing-alexandria"
+  status = 301
+  force = true
+
+# Astro is configured trailingSlash: 'always', but inbound links from elsewhere
+# will not all have one.
+[[redirects]]
+  from = "/blog/introducing-alexandria"
+  to = "https://alexandria.ifftu.dev/blog/introducing-alexandria"
+  status = 301
+  force = true
+
 [build.environment]
   NODE_VERSION = "22"
 
