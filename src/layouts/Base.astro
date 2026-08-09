@@ -13,6 +13,7 @@ interface Props {
   description?: string;
   canonicalPath?: string;
   ogImage?: string;
+  ogImageAlt?: string;
 }
 
 const {
@@ -20,9 +21,15 @@ const {
   description = 'IFFTU — I Fight For The Users. Using cutting-edge technology to solve humanity\'s biggest problems. Open. Transparent. For everyone.',
   canonicalPath,
   ogImage = '/og-image.jpg',
+  ogImageAlt = 'IFFTU — I Fight For The Users',
 } = Astro.props;
 
-const siteUrl = 'https://ifftu.dev';
+// www, not the apex, because that is what the server actually serves: the apex
+// 301s here. Pointing canonical, og:url and the sitemap at the apex meant every
+// page declared a canonical URL that redirects — the site contradicting itself
+// on every URL. If the apex is ever made primary in Netlify, flip this one
+// constant and `site` in astro.config.mjs together.
+const siteUrl = 'https://www.ifftu.dev';
 const canonicalUrl = canonicalPath ? `${siteUrl}${canonicalPath}` : `${siteUrl}${Astro.url.pathname}`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---
@@ -51,8 +58,10 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:site_name" content="IFFTU" />
   <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:alt" content={ogImageAlt} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="en_US" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -61,6 +70,7 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImageUrl} />
+  <meta name="twitter:image:alt" content={ogImageAlt} />
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="IFFTU" href="/rss.xml" />

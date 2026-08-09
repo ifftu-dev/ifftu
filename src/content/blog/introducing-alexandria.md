@@ -1,7 +1,7 @@
 ---
-title: "INTRODUCING ALEXANDRIA"
+title: "Introducing Alexandria"
 date: "2026-04-08"
-excerpt: "A desktop and mobile application that turns every device into a full node in a decentralized education network with verifiable, learner-owned credentials. Free and open source."
+excerpt: "A desktop and mobile app that turns every device into a full node in a decentralized education network, with verifiable, learner-owned credentials."
 tags: ["ANNOUNCEMENT", "ALEXANDRIA", "DECENTRALIZED", "OPEN SOURCE"]
 readTime: "10 MIN"
 author: "Pratyush Pundir"
