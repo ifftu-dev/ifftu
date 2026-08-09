@@ -32,4 +32,6 @@ Knowledge belongs to everyone. It always has. Somewhere along the way we let our
 
 Our first project is called Alexandria. The library that never burns. We can't say more yet. But it's coming.
 
+> *Editor's note (2026): Alexandria has since launched and is open-source — [read the announcement](https://alexandria.ifftu.dev/blog/introducing-alexandria).*
+
 This is just the beginning. More projects. More fights to pick with the status quo. If you believe technology should serve people, not exploit them — you're one of us.
