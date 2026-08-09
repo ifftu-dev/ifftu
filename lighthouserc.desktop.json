@@ -1,0 +1,78 @@
+{
+  "//": [
+    "Lighthouse CI \u2014 desktop. Budgets guard the five metrics we care about.",
+    "",
+    "The numbers are the measured values with headroom, not the measured",
+    "values themselves: a GitHub runner is a shared two-core box, noisier and",
+    "slower than a developer machine, and a budget set at the measurement is a",
+    "build that fails on a bad afternoon rather than on a regression.",
+    "Median-of-3 against the built output at the time of writing:",
+    "",
+    "    /        FCP 444  LCP 444  SI 444  TBT 0  CLS 0.006",
+    "",
+    "CLS and TBT are absolute rather than relative: 0.1 is the Core Web Vitals",
+    "'good' boundary and this site sits at zero, so they catch a real fault",
+    "instead of tracking a moving baseline.",
+    "",
+    "Runs against the built static output, so the check is deterministic and",
+    "runs on every PR. CDN headers and edge latency are Netlify's checks."
+  ],
+  "ci": {
+    "collect": {
+      "startServerCommand": "npx --yes serve dist -l 4199",
+      "startServerReadyPattern": "Accepting connections",
+      "url": [
+        "http://localhost:4199/",
+        "http://localhost:4199/blog/"
+      ],
+      "numberOfRuns": 3,
+      "settings": {
+        "preset": "desktop",
+        "chromeFlags": "--no-sandbox --headless=new"
+      }
+    },
+    "assert": {
+      "assertions": {
+        "first-contentful-paint": [
+          "error",
+          {
+            "maxNumericValue": 1200,
+            "aggregationMethod": "median"
+          }
+        ],
+        "largest-contentful-paint": [
+          "error",
+          {
+            "maxNumericValue": 1200,
+            "aggregationMethod": "median"
+          }
+        ],
+        "speed-index": [
+          "error",
+          {
+            "maxNumericValue": 1200,
+            "aggregationMethod": "median"
+          }
+        ],
+        "total-blocking-time": [
+          "error",
+          {
+            "maxNumericValue": 150,
+            "aggregationMethod": "median"
+          }
+        ],
+        "cumulative-layout-shift": [
+          "error",
+          {
+            "maxNumericValue": 0.1,
+            "aggregationMethod": "median"
+          }
+        ]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": ".lighthouseci/reports"
+    }
+  }
+}
