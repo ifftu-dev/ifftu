@@ -1,0 +1,52 @@
+name: Lighthouse
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# A second push to the same PR makes the first run's numbers irrelevant, and
+# these runs are minutes long — cancel rather than queue.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    name: Lighthouse (${{ matrix.form-factor }})
+    runs-on: ubuntu-latest
+    strategy:
+      # Mobile and desktop have separate budgets and fail for different reasons.
+      # Run both to completion rather than stopping at the first.
+      fail-fast: false
+      matrix:
+        form-factor: [mobile, desktop]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - run: npm ci
+
+      # Astro builds the static output that ships; Lighthouse serves it directly.
+      - name: Build static output
+        run: npm run build
+
+      - name: Lighthouse CI
+        run: npx --yes @lhci/cli@0.15.x autorun --config=lighthouserc.${{ matrix.form-factor }}.json
+
+      # The HTML reports are the only way to see WHY a budget failed, and the
+      # run that produced them is gone once the job ends.
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-${{ matrix.form-factor }}
+          path: .lighthouseci/reports
+          retention-days: 14
+          if-no-files-found: warn

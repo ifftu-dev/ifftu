@@ -27,3 +27,6 @@ ifftu-screenshot.mjs
 
 # Local Netlify folder
 .netlify
+
+# Lighthouse CI run output
+.lighthouseci/
