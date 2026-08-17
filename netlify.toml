@@ -44,11 +44,30 @@
 # browsers that support it. Netlify's durable edge cache is auto-purged on every
 # deploy, and the 5-min browser window bounds any post-deploy staleness.
 # (More-specific /_astro/* and /fonts/* rules above keep their immutable cache.)
+# The CSP is written against what this site actually serves, checked against a
+# real `npm run build` output rather than assumed: 8 pages, 26 inline scripts
+# (Astro's hydration and view-transition glue), one remote script host
+# (plausible.io), and no remote images, stylesheets or iframes.
+#
+#   script-src 'unsafe-inline'  — Astro emits inline scripts per island and a
+#     static build has no nonce to hand them. Removing this needs build-side
+#     CSP hash support, not a header edit. Recorded as still open in
+#     ../docs/security-audit.md.
+#   script-src / connect-src https://plausible.io — the analytics bundle and
+#     where it posts events.
+#
+# The rest bites regardless: `connect-src` bounds where injected script could
+# exfiltrate to, `frame-ancestors 'none'` is the clickjacking control browsers
+# honour over X-Frame-Options, and `object-src`/`base-uri`/`form-action` close
+# three classic injection vectors.
 [[headers]]
   for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=300, stale-while-revalidate=86400"
     Netlify-CDN-Cache-Control = "public, max-age=31536000, durable"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://plausible.io; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; object-src 'none'"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
