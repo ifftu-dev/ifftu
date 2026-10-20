@@ -6,46 +6,20 @@ Project context for AI coding agents working on the IFFTU.dev website.
 
 IFFTU ("I Fight For The Users") is an open source collective building technology that serves humanity. This repository is the organization's website at ifftu.dev.
 
-## Tech Stack
+## Stack Constraints
 
-- **Framework**: Astro 5 (static site generator)
-- **Language**: TypeScript (strict mode)
-- **Styling**: Scoped CSS in Astro components + `src/styles/global.css`
-- **Build output**: Static HTML to `dist/`
+The framework, language and build target are in `package.json`, `astro.config.mjs`
+and `tsconfig.json`. What those files can't tell you:
+
 - **No CSS framework**: All styles are hand-written. Do not add Tailwind, Bootstrap, or similar.
 - **No JS framework**: Pure Astro components. No React, Vue, or Svelte unless explicitly approved.
 
-## Commands
-
-```sh
-npm run dev       # Start dev server on localhost:4321
-npm run build     # Production build to dist/
-npm run preview   # Preview production build locally
-```
-
 Always run `npm run build` after making changes to verify the site compiles without errors.
-
-## Project Structure
-
-```
-src/
-  components/     # Reusable Astro components (Nav, Footer)
-  layouts/        # Page layouts (Base.astro wraps all pages)
-  pages/          # File-based routing
-    blog/         # Blog index + individual post pages
-    contact.astro
-    index.astro   # Homepage
-    projects.astro
-  styles/
-    global.css    # Design tokens, reset, animations, utilities
-public/
-  favicon.svg
-```
 
 ## Architecture Conventions
 
 - **Layout**: All pages use `Base.astro` which provides `<Nav />`, `<main>`, `<Footer />`, the scroll-triggered animation observer, and global CSS imports.
-- **Routing**: Astro file-based routing. `/blog/[slug]` pages are currently individual `.astro` files, not dynamic routes.
+- **Routing**: Astro file-based routing, with `trailingSlash: 'always'` (link to `/path/`, not `/path`). Blog routes are generated from the `blog` content collection (see Blog Posts).
 - **Styling**: Each page/component uses `<style>` blocks for scoped CSS. Global tokens and animation classes live in `global.css`.
 - **Animations**: Elements use `animate-reveal` / `animate-reveal-left` classes with `delay-N` modifiers. An IntersectionObserver in `Base.astro` adds the `is-visible` class on scroll to trigger CSS animations.
 
@@ -57,13 +31,14 @@ The site uses a brutalist raw aesthetic. Maintain these design constraints:
 - `--black: #0a0a0a` (background)
 - `--white: #f0ece4` (bone white text)
 - `--accent: #ff2200` (electric red, used sparingly)
+- `--accent-dim: #ff220033` (translucent accent)
 - `--gray: #666`, `--gray-light: #999` (secondary text)
 - `--border: #2a2a2a` (borders, muted elements)
 
 ### Typography
 - `--font-display`: Bebas Neue (headlines, large display text, always uppercase)
-- `--font-serif`: Instrument Serif (italic body quotes, descriptions)
-- `--font-mono`: JetBrains Mono (UI labels, navigation, metadata, body text)
+- `--font-serif`: Fraunces Variable (italic body quotes, descriptions)
+- `--font-mono`: JetBrains Mono (UI labels, navigation, metadata; the `body` default)
 
 ### Utility Classes
 - `.text-display`, `.text-serif`, `.text-mono` for font application
@@ -80,18 +55,22 @@ The site uses a brutalist raw aesthetic. Maintain these design constraints:
 
 ## Blog Posts
 
-Blog posts are currently individual `.astro` files in `src/pages/blog/`. Each post page includes its own `<style>` block using the shared post styling pattern (`.post`, `.post__header`, `.post__body`, etc.). The blog index at `src/pages/blog/index.astro` has a hardcoded `posts` array that must be updated when adding new posts.
+Posts are Markdown files in `src/content/blog/`, loaded as the `blog` content collection defined in `src/content.config.ts`. Frontmatter requires `title`, `date`, `excerpt`, `tags`, `readTime` and `author`; `draft` is optional and defaults to `false`. Drafts are left out of every route below.
+
+- `src/pages/blog/[...slug].astro` renders each post through the `BlogPost.astro` layout; the slug comes from the file name.
+- `src/pages/blog/index.astro` lists posts from `getCollection`; there is no hand-maintained list.
+- `src/pages/blog/author/[slug].astro` builds one archive per `author` value (slugified).
+- `src/pages/rss.xml.ts` builds the RSS feed.
 
 ## Adding a New Page
 
 1. Create `src/pages/your-page.astro`
 2. Import and wrap content with `Base` layout: `import Base from '../layouts/Base.astro';`
-3. Add navigation entry in `src/components/Nav.astro` (update the `links` array)
+3. Add navigation entry in `src/components/Nav.astro` (update the `links` array; hrefs end in `/`)
 4. Use established page header pattern (`.page-header` with ghost letter, pre-label, title, description)
 5. Run `npm run build` to verify
 
 ## Adding a New Blog Post
 
-1. Create `src/pages/blog/your-slug.astro` following the pattern of existing posts
-2. Add the post metadata to the `posts` array in `src/pages/blog/index.astro`
-3. Run `npm run build` to verify
+1. Create `src/content/blog/your-slug.md` with the frontmatter above
+2. Run `npm run build` to verify

@@ -10,7 +10,7 @@ Website for IFFTU, an open source collective using cutting-edge technology to so
 
 ## Stack
 
-- [Astro](https://astro.build) 6 — static site generator
+- [Astro](https://astro.build) 7 — static site generator
 - TypeScript (strict)
 - Hand-written CSS (no frameworks)
 - Zero client-side JS frameworks
@@ -57,7 +57,6 @@ src/
   content/
     blog/                    # Markdown posts (Astro content collection)
       why-we-fight.md
-      introducing-alexandria.md
   content.config.ts          # Content collection schema + glob loader (posts require author, title, date, excerpt, tags, readTime)
   styles/
     global.css               # Design tokens, reset, animations, utilities
