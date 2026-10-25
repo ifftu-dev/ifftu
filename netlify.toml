@@ -21,7 +21,7 @@
   force = true
 
 [build.environment]
-  NODE_VERSION = "22"
+  NODE_VERSION = "22.23.4"
 
 # Hashed assets (CSS, JS, fonts from _astro/) — immutable, cache forever
 [[headers]]
