@@ -106,4 +106,5 @@ A decentralized, censorship-resistant knowledge preservation system. The library
 
 ## License
 
-All rights reserved. See LICENSE for details.
+Copyright © 2025-2026 Pratyush Pundir <pratyush@alexandria.ifftu.dev>.
+Licensed under the MIT license. See [LICENSE](LICENSE) for details.
