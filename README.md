@@ -17,6 +17,15 @@ Website for IFFTU, an open source collective using cutting-edge technology to so
 
 ## Getting Started
 
+Use **Node.js 22.23.4** with npm, matching [`.nvmrc`](.nvmrc) and the
+[Netlify build configuration](netlify.toml). Supported alternatives are
+22.23.4+ within 22.x, 24.22.1+ within 24.x, and 26.12.1+ within 26.x.
+[`package.json`](package.json) declares this range, and [`.npmrc`](.npmrc)
+enforces it during `npm install` and `npm ci`. These minimum versions include
+the CVE-2026-111497 Brotli decoder fix. Lighthouse CI uses Node 24.22.1.
+
+If you use nvm, run `nvm install` and `nvm use` from the repository root first.
+
 ```sh
 npm install
 npm run dev
