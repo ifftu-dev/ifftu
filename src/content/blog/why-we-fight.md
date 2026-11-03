@@ -3,7 +3,7 @@ title: "Why We Fight"
 date: "2025-02-15"
 excerpt: "The internet promised liberation. It delivered surveillance capitalism. Here's why we started IFFTU and what we intend to do about it."
 tags: ["MANIFESTO", "OPEN SOURCE"]
-readTime: "8 MIN"
+readTime: "2 MIN"
 author: "Pratyush Pundir"
 draft: false
 ---
@@ -28,10 +28,10 @@ We build tools. Open source, radically transparent, designed to solve real probl
 
 ## THE FIGHT AHEAD
 
-Knowledge belongs to everyone. It always has. Somewhere along the way we let ourselves forget that — let it get locked behind paywalls and platform terms and algorithms that decide who gets to see what. It's in the interest of humanity to undo that. All of it.
+Knowledge belongs to everyone. It always has. Somewhere along the way, we let ourselves forget that — let it get locked behind paywalls and platform terms and algorithms that decide who gets to see what. It's in the interest of humanity to undo that. All of it.
 
 Our first project is called Alexandria. The library that never burns. We can't say more yet. But it's coming.
 
-> *Editor's note (2026): Alexandria has since launched and is open-source — [read the announcement](https://alexandria.ifftu.dev/blog/introducing-alexandria).*
+> *Editor's note (2026): Alexandria has since launched and is open source — [read the announcement](https://alexandria.ifftu.dev/blog/introducing-alexandria).*
 
 This is just the beginning. More projects. More fights to pick with the status quo. If you believe technology should serve people, not exploit them — you're one of us.

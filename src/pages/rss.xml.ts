@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'IFFTU — I Fight For The Users',
     description:
-      'Updates, manifestos, and transparency reports from the IFFTU collective. Open source. Transparent. For humanity.',
+      'Updates and manifestos from the IFFTU collective. Open source. Transparent. For humanity.',
     site: context.site ?? 'https://ifftu.dev',
     items: posts.map((post) => ({
       title: post.data.title,
